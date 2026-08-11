@@ -1,0 +1,42 @@
+﻿  ClassCollision.cpp
+  ClassEngine.cpp
+  ClassGameLogic.cpp
+D:\School\Game Programming\practical9\game programming practical\ClassGraphics.h(7,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'ClassEngine.cpp')
+  
+  ClassGraphics.cpp
+D:\School\Game Programming\practical9\game programming practical\ClassGraphics.h(7,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'ClassGraphics.cpp')
+  
+  ClassInput.cpp
+D:\School\Game Programming\practical9\game programming practical\ClassInput.h(7,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'ClassInput.cpp')
+  
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ClassPlayer.cpp
+D:\School\Game Programming\practical9\game programming practical\ClassPlayer.h(6,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'ClassPlayer.cpp')
+  
+  ClassWindow.cpp
+D:\School\Game Programming\practical9\game programming practical\ClassWindow.cpp(31,30): error C2440: '=': cannot convert from 'LPCSTR' to 'LPCWSTR'
+      D:\School\Game Programming\practical9\game programming practical\ClassWindow.cpp(31,30):
+      Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
+  
+D:\School\Game Programming\practical9\game programming practical\ClassWindow.cpp(36,12): error C2664: 'HWND CreateWindowExW(DWORD,LPCWSTR,LPCWSTR,DWORD,int,int,int,int,HWND,HMENU,HINSTANCE,LPVOID)': cannot convert argument 3 from 'LPCSTR' to 'LPCWSTR'
+      D:\School\Game Programming\practical9\game programming practical\ClassWindow.cpp(36,54):
+      Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
+      C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\winuser.h(4441,1):
+      see declaration of 'CreateWindowExW'
+      D:\School\Game Programming\practical9\game programming practical\ClassWindow.cpp(36,12):
+      while trying to match the argument list '(int, LPCWSTR, LPCSTR, long, int, int, int, int, int, int, HMODULE, int)'
+  
+  FrameTimer.cpp
+  Maid.cpp
+D:\School\Game Programming\practical9\game programming practical\Maid.h(5,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'Maid.cpp')
+  
+  Main.cpp
+D:\School\Game Programming\practical9\game programming practical\ClassGraphics.h(7,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'Main.cpp')
+  
+  Generating Code...

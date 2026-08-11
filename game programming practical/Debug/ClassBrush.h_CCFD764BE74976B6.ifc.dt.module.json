@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\ClassBrush.obj",
+            "outputs": [
+                "Debug\\ClassBrush.h_CCFD764BE74976B6.ifc.dt.module.json",
+                "Debug\\ClassBrush.h_CCFD764BE74976B6.ifc.dt.d.json",
+                "Debug\\ClassBrush.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "D:\\School\\Game Programming\\game programming practical\\game programming practical\\ClassBrush.h",
+                    "source-path": "d:\\school\\game programming\\game programming practical\\game programming practical\\classbrush.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

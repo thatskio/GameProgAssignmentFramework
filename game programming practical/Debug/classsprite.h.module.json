@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\ClassSprite.h.obj",
+            "outputs": [
+                "D:\\School\\Game Programming\\game programming practical\\game programming practical\\Debug\\vc145.pdb",
+                "Debug\\",
+                "D:\\School\\Game Programming\\game programming practical\\game programming practical\\Debug\\ClassSprite.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "ClassSprite.h",
+                    "source-path": "d:\\school\\game programming\\game programming practical\\game programming practical\\classsprite.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

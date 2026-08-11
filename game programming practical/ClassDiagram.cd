@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ClassCollision" Collapsed="true">
+    <Position X="8.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAgACAAAAAAAAAA=</HashCode>
+      <FileName>ClassCollision.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassEngine" Collapsed="true">
+    <Position X="10.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QQAAAAAgAAAEgQhAAAAAAQAAmAAgAABAACAQCQAAIAI=</HashCode>
+      <FileName>ClassEngine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassGameLogic" Collapsed="true">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAhAAJAAAAIAAEBIIIAAAAACgAAgAAACAAAIAAAgA=</HashCode>
+      <FileName>ClassGameLogic.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassGraphics" Collapsed="true">
+    <Position X="8.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAFgABIAQAgEBQAIoEEAQACAEgAAACABKBIABgAkgwg=</HashCode>
+      <FileName>ClassGraphics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassInput" Collapsed="true">
+    <Position X="10.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAAAABAwEAgGAAAAAAAAAAQAAAQIAAwAAgAAA=</HashCode>
+      <FileName>ClassInput.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassPlayer" Collapsed="true">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAgAAgAAAAAAAAAgAAAAAEAUQIAAQBwAAAAAA=</HashCode>
+      <FileName>ClassPlayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassWindow" Collapsed="true">
+    <Position X="8.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAgAACAQAAAAAAAIAAAAEAAAAQAAAAABAAAAAg=</HashCode>
+      <FileName>ClassWindow.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FrameTimer" Collapsed="true">
+    <Position X="10.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAgAAAAAACAAAFKAAAAAAA=</HashCode>
+      <FileName>FrameTimer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="BgColour" Collapsed="true">
+    <Position X="8.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAQAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ClassGameLogic.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

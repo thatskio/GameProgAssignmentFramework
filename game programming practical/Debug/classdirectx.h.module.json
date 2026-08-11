@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\ClassDirectX.h.obj",
+            "outputs": [
+                "D:\\School\\Game Programming\\game programming practical\\game programming practical\\Debug\\vc145.pdb",
+                "Debug\\",
+                "D:\\School\\Game Programming\\game programming practical\\game programming practical\\Debug\\ClassDirectX.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "ClassDirectX.h",
+                    "source-path": "d:\\school\\game programming\\game programming practical\\game programming practical\\classdirectx.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
