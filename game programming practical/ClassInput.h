@@ -1,7 +1,5 @@
 #pragma once
-
 #define WIN32_LEAN_AND_MEAN
-
 #include <Windows.h>
 #include <dinput.h>
 #include <d3dx9.h>
@@ -12,21 +10,21 @@ private:
     LPDIRECTINPUTDEVICE8 dInputKeyboardDevice;
     LPDIRECTINPUTDEVICE8 dInputMouseDevice;
 
+    HWND targetWindow;
+
     BYTE diKeys[256];
     DIMOUSESTATE mouseState;
     D3DXVECTOR3 mousePosition;
 
 public:
-    ClassInput();  
-    ~ClassInput(); // Cleanup
+    ClassInput();
+    ~ClassInput();
 
-    // Core 
     bool Initialize(HWND hWnd);
     void Update();
 
-    // Helpers 
     bool IsKeyDown(int key);
-    bool IsMouseButtonDown(int key);
+    bool IsMouseButtonDown(int button);
     long GetMouseDeltaX();
     long GetMouseDeltaY();
     D3DXVECTOR3 GetMousePosition();

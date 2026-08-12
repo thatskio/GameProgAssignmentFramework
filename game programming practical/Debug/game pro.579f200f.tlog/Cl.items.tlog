@@ -1,10 +1,22 @@
-D:\School\Game Programming\practical9\game programming practical\ClassCollision.cpp;D:\School\Game Programming\practical9\game programming practical\Debug\ClassCollision.obj
-D:\School\Game Programming\practical9\game programming practical\ClassEngine.cpp;D:\School\Game Programming\practical9\game programming practical\Debug\ClassEngine.obj
-D:\School\Game Programming\practical9\game programming practical\ClassGameLogic.cpp;D:\School\Game Programming\practical9\game programming practical\Debug\ClassGameLogic.obj
-D:\School\Game Programming\practical9\game programming practical\ClassGraphics.cpp;D:\School\Game Programming\practical9\game programming practical\Debug\ClassGraphics.obj
-D:\School\Game Programming\practical9\game programming practical\ClassInput.cpp;D:\School\Game Programming\practical9\game programming practical\Debug\ClassInput.obj
-D:\School\Game Programming\practical9\game programming practical\ClassPlayer.cpp;D:\School\Game Programming\practical9\game programming practical\Debug\ClassPlayer.obj
-D:\School\Game Programming\practical9\game programming practical\ClassWindow.cpp;D:\School\Game Programming\practical9\game programming practical\Debug\ClassWindow.obj
-D:\School\Game Programming\practical9\game programming practical\FrameTimer.cpp;D:\School\Game Programming\practical9\game programming practical\Debug\FrameTimer.obj
-D:\School\Game Programming\practical9\game programming practical\Maid.cpp;D:\School\Game Programming\practical9\game programming practical\Debug\Maid.obj
-D:\School\Game Programming\practical9\game programming practical\Main.cpp;D:\School\Game Programming\practical9\game programming practical\Debug\Main.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\ClassInput.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\ClassInput.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\ClassWindow.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\ClassWindow.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\FontManager.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\FontManager.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\FrameTimer.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\FrameTimer.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\GameEngine.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\GameEngine.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\GameObject.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\GameObject.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\GameStateManager.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\GameStateManager.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\GraphicsManager.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\GraphicsManager.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\LineManager.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\LineManager.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Maid.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\Maid.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Main.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\Main.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\NPC.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\NPC.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\AILogicManager.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\AILogicManager.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\PhysicsManager.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\PhysicsManager.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Player.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\Player.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Projectile.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\Projectile.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\BulletsManager.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\BulletsManager.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\SpriteManager.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\SpriteManager.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\StateGameOver.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\StateGameOver.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\StateMainMenu.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\StateMainMenu.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\StatePlay.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\StatePlay.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\UIManager.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\UIManager.obj

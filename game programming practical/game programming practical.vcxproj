@@ -136,27 +136,53 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ClassCollision.cpp" />
-    <ClCompile Include="ClassEngine.cpp" />
-    <ClCompile Include="ClassGameLogic.cpp" />
-    <ClCompile Include="ClassGraphics.cpp" />
     <ClCompile Include="ClassInput.cpp" />
-    <ClCompile Include="ClassPlayer.cpp" />
     <ClCompile Include="ClassWindow.cpp" />
+    <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
+    <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameStateManager.cpp" />
+    <ClCompile Include="GraphicsManager.cpp" />
+    <ClCompile Include="LineManager.cpp" />
     <ClCompile Include="Maid.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="AILogicManager.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="BulletsManager.cpp" />
+    <ClCompile Include="SpriteManager.cpp" />
+    <ClCompile Include="StateGameOver.cpp" />
+    <ClCompile Include="StateMainMenu.cpp" />
+    <ClCompile Include="StatePlay.cpp" />
+    <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClassCollision.h" />
-    <ClInclude Include="ClassEngine.h" />
-    <ClInclude Include="ClassGameLogic.h" />
-    <ClInclude Include="ClassGraphics.h" />
     <ClInclude Include="ClassInput.h" />
-    <ClInclude Include="ClassPlayer.h" />
     <ClInclude Include="ClassWindow.h" />
+    <ClInclude Include="FontManager.h" />
     <ClInclude Include="FrameTimer.h" />
+    <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameStateManager.h" />
+    <ClInclude Include="GraphicsManager.h" />
+    <ClInclude Include="IGameState.h" />
+    <ClInclude Include="LineManager.h" />
     <ClInclude Include="Maid.h" />
+    <ClInclude Include="NPC.h" />
+    <ClInclude Include="AILogicManager.h" />
+    <ClInclude Include="PhysicsManager.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Projectile.h" />
+    <ClInclude Include="BulletsManager.h" />
+    <ClInclude Include="SpriteData.h" />
+    <ClInclude Include="SpriteManager.h" />
+    <ClInclude Include="StateGameOver.h" />
+    <ClInclude Include="StateMainMenu.h" />
+    <ClInclude Include="StatePlay.h" />
+    <ClInclude Include="UIManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
