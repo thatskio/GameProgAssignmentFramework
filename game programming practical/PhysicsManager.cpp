@@ -3,6 +3,7 @@
 PhysicsManager::PhysicsManager() {}
 PhysicsManager::~PhysicsManager() {}
 
+//If the distance squared between 2 objects is less than the combined radius squared, means collision = true
 bool PhysicsManager::CheckCollision(GameObject* objA, GameObject* objB) {
     float deltaX = objB->GetPosition().x - objA->GetPosition().x;
     float deltaY = objB->GetPosition().y - objA->GetPosition().y;
@@ -13,11 +14,12 @@ bool PhysicsManager::CheckCollision(GameObject* objA, GameObject* objB) {
 }
 
 void PhysicsManager::ProcessPhysics(AILogicManager* aiManager, BulletsManager* projManager, Player* player, int screenWidth, int screenHeight) {
+    //We wanna compute collisions between all bullets & fishes
     std::vector<NPC*>& fishes = aiManager->GetFishes();
     std::vector<Projectile*>& bullets = projManager->GetBullets();
 
     for (Projectile* bullet : bullets) {
-        if (!bullet->IsActive()) continue;
+        if (!bullet->IsActive()) { continue; } 
 
         D3DXVECTOR2 bPos = bullet->GetPosition();
 
@@ -27,7 +29,7 @@ void PhysicsManager::ProcessPhysics(AILogicManager* aiManager, BulletsManager* p
         }
 
         for (NPC* fish : fishes) {
-            if (!fish->IsActive()) continue;
+            if (!fish->IsActive()) { continue; }
 
             if (CheckCollision(bullet, fish)) {
                 fish->TakeDamage(bullet->GetDamage());
@@ -42,7 +44,7 @@ void PhysicsManager::ProcessPhysics(AILogicManager* aiManager, BulletsManager* p
     }
 
     for (NPC* fish : fishes) {
-        if (!fish->IsActive()) continue;
+        if (!fish->IsActive()) { continue; }
 
         D3DXVECTOR2 fPos = fish->GetPosition();
         D3DXVECTOR2 fVel = fish->GetVelocity();

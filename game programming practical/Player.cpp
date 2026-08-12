@@ -1,8 +1,8 @@
 #include "Player.h"
 
 Player::Player() {
-    score = 0;
-    radius = 16.0f;
+    score   = 0;
+    radius  = 16.0f;
 }
 
 Player::~Player() {}

@@ -1,15 +1,15 @@
-#include "ClassWindow.h"
+#include "Windows.h"
 
-ClassWindow::ClassWindow() {
+Windows::Windows() {
     hWnd = NULL;
     windowName = "Progaming Framework";
 }
 
-HWND ClassWindow::GetHandle() {
+HWND Windows::GetWindowHandle() {
     return hWnd;
 }
 
-LRESULT CALLBACK ClassWindow::WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+LRESULT CALLBACK Windows::WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     switch (message) {
     case WM_DESTROY:
         PostQuitMessage(0);
@@ -20,26 +20,25 @@ LRESULT CALLBACK ClassWindow::WindowProcedure(HWND hWnd, UINT message, WPARAM wP
     return 0;
 }
 
-void ClassWindow::CreateMyWindow() {
+void Windows::CreateMyWindow() {
     ZeroMemory(&wndClass, sizeof(wndClass));
 
     wndClass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
     wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
     wndClass.hInstance = GetModuleHandle(NULL);
-    wndClass.lpfnWndProc = ClassWindow::WindowProcedure;
+    wndClass.lpfnWndProc = Windows::WindowProcedure;
     wndClass.lpszClassName = windowName;
     wndClass.style = CS_HREDRAW | CS_VREDRAW;
 
     RegisterClass(&wndClass);
 
-    // --- NEW MATH: Calculate the exact window size needed for an 800x600 canvas ---
-    RECT wr = { 0, 0, 800, 600 };
-    AdjustWindowRect(&wr, WS_OVERLAPPEDWINDOW, FALSE);
-    int exactWidth = wr.right - wr.left;
-    int exactHeight = wr.bottom - wr.top;
-    // ------------------------------------------------------------------------------
+    //Window size
+    RECT windowRect = { 0, 0, 800, 600 };
+    AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, FALSE);
+    int exactWidth = windowRect.right - windowRect.left;
+    int exactHeight = windowRect.bottom - windowRect.top;
 
-    // Apply the exactWidth and exactHeight instead of hardcoding 800 and 600
+    //Apply the exactWidth and exactHeight instead of hardcoding 800 and 600
     hWnd = CreateWindowEx(0, wndClass.lpszClassName, windowName,
         WS_OVERLAPPEDWINDOW, 0, 100, exactWidth, exactHeight,
         NULL, NULL, GetModuleHandle(NULL), NULL);
@@ -48,7 +47,7 @@ void ClassWindow::CreateMyWindow() {
     ShowCursor(true);
 }
 
-bool ClassWindow::WindowIsRunning(MSG& msg) {
+bool Windows::WindowIsRunning(MSG& msg) {
     while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
         if (msg.message == WM_QUIT) { return false; }
         TranslateMessage(&msg);
@@ -57,6 +56,6 @@ bool ClassWindow::WindowIsRunning(MSG& msg) {
     return true;
 }
 
-void ClassWindow::CleanupWindow() {
+void Windows::CleanupWindow() {
     UnregisterClass(wndClass.lpszClassName, GetModuleHandle(NULL));
 }

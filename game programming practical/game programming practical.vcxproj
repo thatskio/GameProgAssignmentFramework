@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -136,8 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ClassInput.cpp" />
-    <ClCompile Include="ClassWindow.cpp" />
+    <ClCompile Include="PlayerInput.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="GameEngine.cpp" />
@@ -158,10 +157,10 @@
     <ClCompile Include="StateMainMenu.cpp" />
     <ClCompile Include="StatePlay.cpp" />
     <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="Windows.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClassInput.h" />
-    <ClInclude Include="ClassWindow.h" />
+    <ClInclude Include="PlayerInput.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="GameEngine.h" />
@@ -183,6 +182,7 @@
     <ClInclude Include="StateMainMenu.h" />
     <ClInclude Include="StatePlay.h" />
     <ClInclude Include="UIManager.h" />
+    <ClInclude Include="Windows.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

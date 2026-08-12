@@ -3,12 +3,11 @@
 #include "StatePlay.h"
 #include "GameStateManager.h"
 
-StateGameOver::StateGameOver(GameStateManager* handlerPtr, IDirect3DDevice9* device, ClassInput* inputPtr, int width, int height, int score)
-    : IGameState(handlerPtr) {
-    input = inputPtr;
-    screenWidth = width;
-    screenHeight = height;
-    finalScore = score;
+StateGameOver::StateGameOver(GameStateManager* handlerPtr, IDirect3DDevice9* device, PlayerInput* inputPtr, int width, int height, int score): IGameState(handlerPtr) {
+    input           = inputPtr;
+    screenWidth     = width;
+    screenHeight    = height;
+    finalScore      = score;
 
     localMaid.Init(device);
     lineManager.Initialize(device);
@@ -25,17 +24,19 @@ void StateGameOver::Input() {
         float mx = input->GetMousePosition().x;
         float my = input->GetMousePosition().y;
 
-        // Replay Button bounding box check
+        //Main menu button
         if (mx > screenWidth / 2 - 100 && mx < screenWidth / 2 + 100 &&
             my > screenHeight / 2 + 50 && my < screenHeight / 2 + 100) {
             handler->ChangeState(new StateMainMenu(handler, localMaid.GetDevice(), input, screenWidth, screenHeight));
         }
 
+        //Replay button
         if (mx > screenWidth / 2 - 100 && mx < screenWidth / 2 + 100 &&
             my > screenHeight / 2 + 120 && my < screenHeight / 2 + 170) {
             handler->ChangeState(new StatePlay(handler, localMaid.GetDevice(), input, screenWidth, screenHeight));
         }
 
+        //Exit button
         if (mx > screenWidth / 2 - 100 && mx < screenWidth / 2 + 100 &&
             my > screenHeight / 2 + 190 && my < screenHeight / 2 + 240) {
             PostQuitMessage(0);

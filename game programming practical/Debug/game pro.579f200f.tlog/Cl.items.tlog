@@ -1,5 +1,4 @@
-C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\ClassInput.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\ClassInput.obj
-C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\ClassWindow.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\ClassWindow.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\PlayerInput.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\PlayerInput.obj
 C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\FontManager.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\FontManager.obj
 C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\FrameTimer.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\FrameTimer.obj
 C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\GameEngine.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\GameEngine.obj
@@ -20,3 +19,4 @@ C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\
 C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\StateMainMenu.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\StateMainMenu.obj
 C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\StatePlay.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\StatePlay.obj
 C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\UIManager.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\UIManager.obj
+C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Windows.cpp;C:\Users\ADMIN\Downloads\GameProgAssignmentFramework\game programming practical\Debug\Windows.obj

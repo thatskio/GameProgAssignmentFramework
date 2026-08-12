@@ -25,12 +25,12 @@ void BulletsManager::SpawnBullet(D3DXVECTOR2 position, D3DXVECTOR2 velocity, int
 
 void BulletsManager::Update() {
     for (Projectile* bullet : bulletPool) {
-        if (bullet->IsActive()) bullet->Update();
+        if (bullet->IsActive()) { bullet->Update(); }
     }
 }
 
 void BulletsManager::Render(SpriteManager* spriteManager) {
     for (Projectile* bullet : bulletPool) {
-        if (bullet->IsActive()) bullet->Render(spriteManager);
+        if (bullet->IsActive()) { bullet->Render(spriteManager); }
     }
 }

@@ -9,7 +9,7 @@
 #include "BulletsManager.h"
 #include "PhysicsManager.h"
 #include "Maid.h"
-#include "ClassInput.h"
+#include "PlayerInput.h"
 
 class StatePlay : public IGameState {
 private:
@@ -23,7 +23,7 @@ private:
     AILogicManager aiManager;
     BulletsManager bulletsManager;
     PhysicsManager physicsManager;
-    ClassInput* input;
+    PlayerInput* input;
 
     float roundTimer;
     int screenWidth;
@@ -32,7 +32,7 @@ private:
     bool wasMouseDown;
 
 public:
-    StatePlay(GameStateManager* handlerPtr, IDirect3DDevice9* pDevice, ClassInput* inputPtr, int width, int height);
+    StatePlay(GameStateManager* handlerPtr, IDirect3DDevice9* pDevice, PlayerInput* inputPtr, int width, int height);
     ~StatePlay();
 
     void Input() override;

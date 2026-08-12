@@ -1,11 +1,11 @@
 #include "GameObject.h"
 
 GameObject::GameObject() {
-    position = D3DXVECTOR2(0.0f, 0.0f);
-    velocity = D3DXVECTOR2(0.0f, 0.0f);
-    rotation = 0.0f;
-    radius = 10.0f;
-    isActive = true;
+    position    = D3DXVECTOR2(0.0f, 0.0f);
+    velocity    = D3DXVECTOR2(0.0f, 0.0f);
+    rotation    = 0.0f;
+    radius      = 10.0f;
+    isActive    = true;
 }
 
 GameObject::~GameObject() {}

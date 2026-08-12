@@ -1,4 +1,5 @@
 #include "SpriteManager.h"
+#include <iostream>
 
 SpriteManager::SpriteManager() {
     spriteBrush = nullptr;
@@ -6,7 +7,7 @@ SpriteManager::SpriteManager() {
 }
 
 SpriteManager::~SpriteManager() {
-    if (spriteBrush) spriteBrush->Release();
+    if (spriteBrush) { spriteBrush->Release(); }
 }
 
 bool SpriteManager::Initialize(IDirect3DDevice9* device, Maid* maid) {
@@ -34,11 +35,14 @@ SpriteData SpriteManager::GetSprite(const std::string& key) {
 }
 
 void SpriteManager::Begin() {
-    if (spriteBrush) spriteBrush->Begin(D3DXSPRITE_ALPHABLEND);
+    if (spriteBrush) { spriteBrush->Begin(D3DXSPRITE_ALPHABLEND); }
 }
 
 void SpriteManager::Draw(SpriteData sprite, D3DXVECTOR2 position, float rotation, D3DXVECTOR2 scale) {
-    if (!spriteBrush || !sprite.texture) return;
+    if (!spriteBrush || !sprite.texture) {
+        std::cout << "Sprite brush or sprite texture invalid!";
+        return;
+    }
 
     D3DXMATRIX matrix;
     D3DXVECTOR2 rotationCenter((sprite.rect.right - sprite.rect.left) * 0.5f, (sprite.rect.bottom - sprite.rect.top) * 0.5f);
@@ -56,8 +60,5 @@ void SpriteManager::Draw(SpriteData sprite, D3DXVECTOR2 position, float rotation
 }
 
 void SpriteManager::End() {
-    if (spriteBrush) spriteBrush->End();
+    if (spriteBrush) { spriteBrush->End(); }
 }
-
-void SpriteManager::OnLostDevice() { if (spriteBrush) spriteBrush->OnLostDevice(); }
-void SpriteManager::OnResetDevice() { if (spriteBrush) spriteBrush->OnResetDevice(); }

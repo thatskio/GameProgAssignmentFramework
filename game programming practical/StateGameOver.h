@@ -3,7 +3,7 @@
 #include "LineManager.h"
 #include "FontManager.h"
 #include "UIManager.h"
-#include "ClassInput.h"
+#include "PlayerInput.h"
 #include "Maid.h"
 
 class StateGameOver : public IGameState {
@@ -12,14 +12,14 @@ private:
     LineManager lineManager;
     FontManager fontManager;
     UIManager* uiManager;
-    ClassInput* input;
+    PlayerInput* input;
 
     int screenWidth;
     int screenHeight;
     int finalScore;
 
 public:
-    StateGameOver(GameStateManager* handlerPtr, IDirect3DDevice9* device, ClassInput* inputPtr, int width, int height, int score);
+    StateGameOver(GameStateManager* handlerPtr, IDirect3DDevice9* device, PlayerInput* inputPtr, int width, int height, int score);
     ~StateGameOver();
 
     void Input() override;

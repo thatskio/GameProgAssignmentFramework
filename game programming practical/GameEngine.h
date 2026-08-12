@@ -1,17 +1,17 @@
 #pragma once
-#include "ClassWindow.h"
+#include "Windows.h"
 #include "GraphicsManager.h" 
-#include "ClassInput.h"
+#include "PlayerInput.h"
 #include "FrameTimer.h"
 #include "GameStateManager.h" 
 
 class GameEngine {
 private:
-    ClassWindow Window;
-    GraphicsManager Graphics;
-    ClassInput Input;
+    Windows window;
+    GraphicsManager graphics;
+    PlayerInput input;
     FrameTimer gameTimer;
-    GameStateManager StateManager;
+    GameStateManager stateManager;
 
     bool isRunning;
 
@@ -22,8 +22,8 @@ public:
     void Run();
     void Shutdown();
 
-    // Allows individual GameStates to access global tools via the Engine
-    GraphicsManager* GetGraphics() { return &Graphics; }
-    ClassInput* GetInput() { return &Input; }
+    //Allows individual game states to access global tools via game engine
+    GraphicsManager* GetGraphics() { return &graphics; }
+    PlayerInput* GetInput() { return &input; }
     void Quit() { isRunning = false; }
 };

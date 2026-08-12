@@ -1,12 +1,12 @@
 #include "GameStateManager.h"
 
 GameStateManager::GameStateManager() {
-    currentState = nullptr;
-    nextState = nullptr;
+    currentState    = nullptr;
+    nextState       = nullptr;
 }
 
 GameStateManager::~GameStateManager() {
-    if (currentState) delete currentState;
+    if (currentState) { delete currentState; }
 }
 
 void GameStateManager::ChangeState(IGameState* newState) {
@@ -21,13 +21,19 @@ void GameStateManager::Update(float deltaTime) {
         currentState = nextState;
         nextState = nullptr;
     }
-    if (currentState) currentState->Update(deltaTime);
+    if (currentState) {
+        currentState->Update(deltaTime);
+    }
 }
 
 void GameStateManager::HandleInput() {
-    if (currentState) currentState->Input();
+    if (currentState) {
+        currentState->Input();
+    }
 }
 
 void GameStateManager::Render() {
-    if (currentState) currentState->Render();
+    if (currentState) {
+        currentState->Render();
+    }
 }
