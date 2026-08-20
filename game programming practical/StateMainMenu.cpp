@@ -24,7 +24,7 @@ void StateMainMenu::Input() {
 
         //Simple bounding box for start button in the centre of the screen
         if (mouseX > screenWidth / 2 - 100 && mouseX < screenWidth / 2 + 100 && mouseY > screenHeight / 2 - 25 && mouseY < screenHeight / 2 + 25) {
-            handler->ChangeState(new StatePlay(handler, localMaid.GetDevice(), input, screenWidth, screenHeight));
+            handler->PushState(new StatePlay(handler, localMaid.GetDevice(), input, screenWidth, screenHeight));
         }
     }
 }

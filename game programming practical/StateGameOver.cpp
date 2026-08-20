@@ -24,16 +24,24 @@ void StateGameOver::Input() {
         float mx = input->GetMousePosition().x;
         float my = input->GetMousePosition().y;
 
-        //Main menu button
+        //Main menu button 
+        //Note: Because the main menu button only has an active button without any AI logic, so its safe to just pop back to this state
         if (mx > screenWidth / 2 - 100 && mx < screenWidth / 2 + 100 &&
             my > screenHeight / 2 + 50 && my < screenHeight / 2 + 100) {
-            handler->ChangeState(new StateMainMenu(handler, localMaid.GetDevice(), input, screenWidth, screenHeight));
+            //handler->ChangeState(new StateMainMenu(handler, localMaid.GetDevice(), input, screenWidth, screenHeight));
+            handler->PopState();
+            handler->PopState();
+            return;
         }
 
         //Replay button
+        //Note: Because if we return directly to Play State without "refreshing" the state, AI Logic etc are all already disconnected
+        //Causing the Play State to be unplayable/uninteractable, so we pop the current state + refresh the play state
         if (mx > screenWidth / 2 - 100 && mx < screenWidth / 2 + 100 &&
             my > screenHeight / 2 + 120 && my < screenHeight / 2 + 170) {
-            handler->ChangeState(new StatePlay(handler, localMaid.GetDevice(), input, screenWidth, screenHeight));
+            handler->PopState();
+            handler->ChangeState(new StatePlay(handler, localMaid.GetDevice(), input, screenWidth, screenHeight)); //Revive the PlayState 
+            return;
         }
 
         //Exit button

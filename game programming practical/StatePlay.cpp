@@ -92,7 +92,7 @@ void StatePlay::Input() {
 void StatePlay::Update(float deltaTime) {
     roundTimer -= deltaTime;
     if (roundTimer <= 0.0f) {   //Don't spawn more fishes if wave timer is over
-        handler->ChangeState(new StateGameOver(handler, localMaid.GetDevice(), input, screenWidth, screenHeight, player.GetScore()));
+        handler->PushState(new StateGameOver(handler, localMaid.GetDevice(), input, screenWidth, screenHeight, player.GetScore()));
         return;
     }
 
