@@ -2,14 +2,14 @@
 #include "StatePlay.h"
 #include "GameStateManager.h" 
 
-StateMainMenu::StateMainMenu(GameStateManager* handlerPtr, IDirect3DDevice9* pDevice, PlayerInput* inputPtr, int width, int height) : IGameState(handlerPtr) {
-    input = inputPtr;
-    screenWidth = width;
-    screenHeight = height;
-    d3dDevice = pDevice;
+StateMainMenu::StateMainMenu(GameStateManager* stateManagerPointer, IDirect3DDevice9* direct3DDevice, PlayerInput* playerInputPointer, int initialScreenWidth, int initialScreenHeight) : IGameState(stateManagerPointer) {
+    input = playerInputPointer;
+    screenWidth = initialScreenWidth;
+    screenHeight = initialScreenHeight;
+    d3dDevice = direct3DDevice;
 
-    lineManager.Initialize(pDevice);
-    fontManager.Initialize(pDevice, 24, "Arial");
+    lineManager.Initialize(direct3DDevice);
+    fontManager.Initialize(direct3DDevice, 24, "Arial");
 
     //Initializing sounds
     audioManager = new AudioManager();

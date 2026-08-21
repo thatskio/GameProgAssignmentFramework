@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\StateMainMenu.obj",
+            "outputs": [
+                "Debug\\StateMainMenu.cpp.obj.dt.module.json",
+                "Debug\\StateMainMenu.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

@@ -1,61 +1,64 @@
 #include "Windows.h"
 
 Windows::Windows() {
-    hWnd = NULL;
+    windowHandle = NULL;
     windowName = "Progaming Framework";
 }
 
 HWND Windows::GetWindowHandle() {
-    return hWnd;
+    return windowHandle;
 }
 
-LRESULT CALLBACK Windows::WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+LRESULT CALLBACK Windows::WindowProcedure(HWND windowHandle, UINT message, WPARAM wordParameter, LPARAM longParameter) {
     switch (message) {
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
     default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
+        return DefWindowProc(windowHandle, message, wordParameter, longParameter);
     }
     return 0;
 }
 
-void Windows::CreateMyWindow() {
-    ZeroMemory(&wndClass, sizeof(wndClass));
+void Windows::CreateMyWindow(int screenWidth, int screenHeight, bool isFullscreen) {
+    ZeroMemory(&windowClass, sizeof(windowClass));
 
-    wndClass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
-    wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-    wndClass.hInstance = GetModuleHandle(NULL);
-    wndClass.lpfnWndProc = Windows::WindowProcedure;
-    wndClass.lpszClassName = windowName;
-    wndClass.style = CS_HREDRAW | CS_VREDRAW;
+    windowClass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+    windowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+    windowClass.hInstance = GetModuleHandle(NULL);
+    windowClass.lpfnWndProc = Windows::WindowProcedure;
+    windowClass.lpszClassName = windowName;
+    windowClass.style = CS_HREDRAW | CS_VREDRAW;
 
-    RegisterClass(&wndClass);
+    RegisterClass(&windowClass);
+
+    //Toggle window border style based on fullscreen request
+    DWORD windowStyle = isFullscreen ? WS_POPUP : WS_OVERLAPPEDWINDOW;
 
     //Window size
-    RECT windowRect = { 0, 0, 800, 600 };
-    AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, FALSE);
-    int exactWidth = windowRect.right - windowRect.left;
-    int exactHeight = windowRect.bottom - windowRect.top;
+    RECT windowSize = { 0, 0, screenWidth, screenHeight };
+    AdjustWindowRect(&windowSize, windowStyle, FALSE);
+    int exactWidth = windowSize.right - windowSize.left;
+    int exactHeight = windowSize.bottom - windowSize.top;
 
     //Apply the exactWidth and exactHeight instead of hardcoding 800 and 600
-    hWnd = CreateWindowEx(0, wndClass.lpszClassName, windowName,
-        WS_OVERLAPPEDWINDOW, 0, 100, exactWidth, exactHeight,
+    windowHandle = CreateWindowEx(0, windowClass.lpszClassName, windowName,
+        windowStyle, 0, 100, exactWidth, exactHeight,
         NULL, NULL, GetModuleHandle(NULL), NULL);
 
-    ShowWindow(hWnd, 1);
+    ShowWindow(windowHandle, 1);
     ShowCursor(true);
 }
 
-bool Windows::WindowIsRunning(MSG& msg) {
-    while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
-        if (msg.message == WM_QUIT) { return false; }
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
+bool Windows::WindowIsRunning(MSG& windowMessage) {
+    while (PeekMessage(&windowMessage, NULL, 0, 0, PM_REMOVE)) {
+        if (windowMessage.message == WM_QUIT) { return false; }
+        TranslateMessage(&windowMessage);
+        DispatchMessage(&windowMessage);
     }
     return true;
 }
 
 void Windows::CleanupWindow() {
-    UnregisterClass(wndClass.lpszClassName, GetModuleHandle(NULL));
+    UnregisterClass(windowClass.lpszClassName, GetModuleHandle(NULL));
 }

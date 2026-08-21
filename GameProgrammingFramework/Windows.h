@@ -6,18 +6,18 @@
 
 class Windows {
 private:
-	HWND hWnd;
-	WNDCLASS wndClass;
+	HWND windowHandle;
+	WNDCLASS windowClass;
 	LPCSTR windowName;
 
-	static LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	static LRESULT CALLBACK WindowProcedure(HWND windowHandle, UINT message, WPARAM wordParameter, LPARAM longParameter);
 
 
 public:
 	Windows();
 
-	void CreateMyWindow();
-	bool WindowIsRunning(MSG& msg);
+	void CreateMyWindow(int screenWidth, int screenHeight, bool isFullscreen);
+	bool WindowIsRunning(MSG& windowMessage);
 	void CleanupWindow();
 	HWND GetWindowHandle();
 };

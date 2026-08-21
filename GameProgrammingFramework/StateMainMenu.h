@@ -19,7 +19,7 @@ private:
     int screenHeight;
 
 public:
-    StateMainMenu(GameStateManager* handlerPtr, IDirect3DDevice9* device, PlayerInput* inputPtr, int width, int height);
+    StateMainMenu(GameStateManager* stateManagerPointer, IDirect3DDevice9* direct3DDevice, PlayerInput* playerInputPointer, int initialScreenWidth, int initialScreenHeight);
     ~StateMainMenu();
 
     void Input() override;

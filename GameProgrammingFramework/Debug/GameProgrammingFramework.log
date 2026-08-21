@@ -2,8 +2,7 @@
   GameEngine.cpp
   C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
 D:\School\Game Programming\GameProgAssignmentFramework\GameProgrammingFramework\GameEngine.cpp(26,20): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  GameStateManager.cpp
-  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  GraphicsManager.cpp
   Main.cpp
   C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
   StateGameOver.cpp
@@ -12,5 +11,7 @@ D:\School\Game Programming\GameProgAssignmentFramework\GameProgrammingFramework\
   C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
   StatePlay.cpp
   C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  UIManager.cpp
+  Windows.cpp
   Generating Code...
   GameProgrammingFramework.vcxproj -> D:\School\Game Programming\GameProgAssignmentFramework\Debug\GameProgrammingFramework.exe

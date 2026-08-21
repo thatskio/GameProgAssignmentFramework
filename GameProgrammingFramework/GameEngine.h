@@ -5,6 +5,10 @@
 #include "FrameTimer.h"
 #include "GameStateManager.h" 
 
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
+const bool IS_FULLSCREEN = true;
+
 class GameEngine {
 private:
     Windows window;
@@ -18,7 +22,7 @@ private:
 public:
     GameEngine();
 
-    bool Initialize(HINSTANCE hInstance);
+    bool Initialize(HINSTANCE applicationInstance);
     void Run();
     void Shutdown();
 

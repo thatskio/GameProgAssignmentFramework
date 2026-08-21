@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="AILogicManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletsManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameTimer.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="LineManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Maid.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInput.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="StateGameOver.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMainMenu.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="StatePlay.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AILogicManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletsManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameTimer.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameState.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="LineManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Maid.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInput.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteData.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="StateGameOver.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMainMenu.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="StatePlay.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header">
+      <UniqueIdentifier>{1b87cd17-616c-4c6d-b9c4-4ee1a54889b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{bd6f91ad-778b-4abd-bce5-306cca91a0da}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

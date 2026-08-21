@@ -6,20 +6,20 @@
 #include <ctime> 
 #include <cmath> //Needed for bullet trajectory math
 
-StatePlay::StatePlay(GameStateManager* handlerPtr, IDirect3DDevice9* pDevice, PlayerInput* inputPtr, int width, int height) : IGameState(handlerPtr) {
+StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* direct3DDevice, PlayerInput* playerInputPointer, int initialScreenWidth, int initialScreenHeight) : IGameState(stateManagerPointer) {
     //Variables
-    input = inputPtr;
-    screenWidth = width;
-    screenHeight = height;
+    input = playerInputPointer;
+    screenWidth = initialScreenWidth;
+    screenHeight = initialScreenHeight;
     roundTimer = 30.0f;     //Change how long a game lasts here
     fishRespawnTimer = 0.0f;
-    wasMouseDown = false;
-    d3dDevice = pDevice;
+    wasMouseButtonDown = false;
+    d3dDevice = direct3DDevice;
 
     //Initialize tools
-    spriteManager.Initialize(pDevice);
-    lineManager.Initialize(pDevice);
-    fontManager.Initialize(pDevice, 20, "Arial");
+    spriteManager.Initialize(direct3DDevice);
+    lineManager.Initialize(direct3DDevice);
+    fontManager.Initialize(direct3DDevice, 20, "Arial");
     uiManager = new UIManager(&lineManager, &fontManager);
 
     //Initialize sprites
@@ -44,15 +44,15 @@ StatePlay::StatePlay(GameStateManager* handlerPtr, IDirect3DDevice9* pDevice, Pl
     //Spawning random fishes (x20)
     srand((unsigned int)time(NULL));
     for (int i = 0; i < 20; i++) {
-        float randX = (float)(rand() % (screenWidth - 64) + 32);
-        float randY = (float)(rand() % (screenHeight - 100) + 50);
+        float randomPositionX = (float)(rand() % (screenWidth - 64) + 32);
+        float randomPositionY = (float)(rand() % (screenHeight - 100) + 50);
 
-        float vX = (float)((rand() % 5) - 2);
-        float vY = (float)((rand() % 5) - 2);
-        if (vX == 0.0f) { vX = 1.5f; }
-        if (vY == 0.0f) { vY = -1.5f; }
+        float velocityX = (float)((rand() % 5) - 2);
+        float velocityY = (float)((rand() % 5) - 2);
+        if (velocityX == 0.0f) { velocityX = 1.5f; }
+        if (velocityY == 0.0f) { velocityY = -1.5f; }
 
-        aiManager.SpawnFish(D3DXVECTOR2(randX, randY), D3DXVECTOR2(vX, vY), 10, 100, fishSprite);
+        aiManager.SpawnFish(D3DXVECTOR2(randomPositionX, randomPositionY), D3DXVECTOR2(velocityX, velocityY), 10, 100, fishSprite);
     }
 }
 
@@ -64,15 +64,15 @@ StatePlay::~StatePlay() {
 void StatePlay::Input() {
     player.UpdateInput((float)input->GetMousePosition().x, (float)input->GetMousePosition().y);
 
-    bool isMouseDown = input->IsMouseButtonDown(0);
-    if (isMouseDown && !wasMouseDown) {
+    bool isMouseButtonDown = input->IsMouseButtonDown(0);
+    if (isMouseButtonDown && !wasMouseButtonDown) {
 
         //Anchor the gun to the bottom middle
-        D3DXVECTOR2 gunPos((float)(screenWidth / 2), (float)screenHeight);
-        D3DXVECTOR2 targetPos = player.GetPosition(); // The crosshair
+        D3DXVECTOR2 gunPosition((float)(screenWidth / 2), (float)screenHeight);
+        D3DXVECTOR2 targetPosition = player.GetPosition(); // The crosshair
 
         //Find the direction vector
-        D3DXVECTOR2 direction = targetPos - gunPos;
+        D3DXVECTOR2 direction = targetPosition - gunPosition;
 
         //Normalize the vector (calculate length, then divide x and y by it)
         float length = sqrt((direction.x * direction.x) + (direction.y * direction.y));
@@ -85,14 +85,14 @@ void StatePlay::Input() {
         }
 
         //Apply speed multiplier to the normalized direction
-        D3DXVECTOR2 bulletVel = direction * 15.0f;
+        D3DXVECTOR2 bulletVelocity = direction * 15.0f;
 
         SpriteData bulletSprite = spriteManager.GetSprite("Bullet");
         bulletSprite.red = 255; bulletSprite.green = 255; bulletSprite.blue = 0;
 
-        bulletsManager.SpawnBullet(gunPos, bulletVel, 10, bulletSprite);
+        bulletsManager.SpawnBullet(gunPosition, bulletVelocity, 10, bulletSprite);
     }
-    wasMouseDown = isMouseDown;
+    wasMouseButtonDown = isMouseButtonDown;
 }
 
 void StatePlay::Update(float deltaTime) {
@@ -111,18 +111,18 @@ void StatePlay::Update(float deltaTime) {
         }
 
         if (activeFishes < 20) {
-            float randX = (float)(rand() % (screenWidth - 64) + 32);
-            float randY = (float)(rand() % (screenHeight - 100) + 50);
+            float randomPositionX = (float)(rand() % (screenWidth - 64) + 32);
+            float randomPositionY = (float)(rand() % (screenHeight - 100) + 50);
 
-            float vX = (float)((rand() % 5) - 2);
-            float vY = (float)((rand() % 5) - 2);
-            if (vX == 0.0f) vX = 1.5f;
-            if (vY == 0.0f) vY = -1.5f;
+            float velocityX = (float)((rand() % 5) - 2);
+            float velocityY = (float)((rand() % 5) - 2);
+            if (velocityX == 0.0f) velocityX = 1.5f;
+            if (velocityY == 0.0f) velocityY = -1.5f;
 
             SpriteData fishSprite = spriteManager.GetSprite("GoldFish");
             fishSprite.red = 255; fishSprite.green = 50; fishSprite.blue = 50;
 
-            aiManager.SpawnFish(D3DXVECTOR2(randX, randY), D3DXVECTOR2(vX, vY), 10, 100, fishSprite);
+            aiManager.SpawnFish(D3DXVECTOR2(randomPositionX, randomPositionY), D3DXVECTOR2(velocityX, velocityY), 10, 100, fishSprite);
 
             fishRespawnTimer = 2.0f; //2-second cooldown before spawning another
         }

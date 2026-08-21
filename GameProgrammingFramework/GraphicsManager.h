@@ -6,8 +6,8 @@
 
 class GraphicsManager {
 private:
-	IDirect3DDevice9* d3dDevice;
-	D3DPRESENT_PARAMETERS d3dPP;
+	IDirect3DDevice9* direct3DDevice;
+	D3DPRESENT_PARAMETERS direct3DPresentParameters;
 
 	int monitorWidth;
 	int monitorHeight;
@@ -16,11 +16,11 @@ public:
 	GraphicsManager();
 	~GraphicsManager();
 
-	bool Initialize(HWND hWnd);
+	bool Initialize(HWND windowHandle, int screenWidth, int screenHeight, bool isFullscreen);
 	void ClearScreen(int red, int green, int blue);
 	void BeginScene();
 	void EndScene();
 
-	IDirect3DDevice9* GetDevice() const { return d3dDevice; }
-	D3DPRESENT_PARAMETERS GetPP() const { return d3dPP; }
+	IDirect3DDevice9* GetDevice() const { return direct3DDevice; }
+	D3DPRESENT_PARAMETERS GetPresentParameters() const { return direct3DPresentParameters; }
 };

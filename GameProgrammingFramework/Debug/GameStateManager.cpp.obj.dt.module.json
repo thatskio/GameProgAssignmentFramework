@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\GameStateManager.obj",
+            "outputs": [
+                "Debug\\GameStateManager.cpp.obj.dt.module.json",
+                "Debug\\GameStateManager.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

@@ -30,10 +30,10 @@ private:
     int screenWidth;
     int screenHeight;
     float fishRespawnTimer;
-    bool wasMouseDown;
+    bool wasMouseButtonDown;
 
 public:
-    StatePlay(GameStateManager* handlerPtr, IDirect3DDevice9* pDevice, PlayerInput* inputPtr, int width, int height);
+    StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* direct3DDevice, PlayerInput* playerInputPointer, int initialScreenWidth, int initialScreenHeight);
     ~StatePlay();
 
     void Input() override;

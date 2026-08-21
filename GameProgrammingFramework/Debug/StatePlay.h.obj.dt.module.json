@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\StatePlay.obj",
+            "outputs": [
+                "Debug\\StatePlay.h.obj.dt.module.json",
+                "Debug\\StatePlay.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

@@ -8,20 +8,20 @@ GameEngine::GameEngine() {
     isRunning = false;
 }
 
-bool GameEngine::Initialize(HINSTANCE hInstance) {
-    window.CreateMyWindow();
+bool GameEngine::Initialize(HINSTANCE applicationInstance) {
+    window.CreateMyWindow(SCREEN_WIDTH, SCREEN_HEIGHT, IS_FULLSCREEN);
     std::cout << "Loaded window!";
 
-    if (!graphics.Initialize(window.GetWindowHandle())) { 
+    if (!graphics.Initialize(window.GetWindowHandle(), SCREEN_WIDTH, SCREEN_HEIGHT, IS_FULLSCREEN)) {
         std::cout << "Graphics failed to load!";
-        return false; 
+        return false;
     }
     if (!input.Initialize(window.GetWindowHandle())) {
         std::cout << "Player input failed to load!";
         return false;
     }
 
-    stateManager.ChangeState(new StateMainMenu(&stateManager, graphics.GetDevice(), &input, 800, 600));
+    stateManager.ChangeState(new StateMainMenu(&stateManager, graphics.GetDevice(), &input, SCREEN_WIDTH, SCREEN_HEIGHT));
 
     gameTimer.Init(FRAMES_PER_SECOND);
     isRunning = true;
@@ -29,11 +29,11 @@ bool GameEngine::Initialize(HINSTANCE hInstance) {
 }
 
 void GameEngine::Run() {
-    MSG msg;
-    ZeroMemory(&msg, sizeof(msg));
+    MSG windowMessage;
+    ZeroMemory(&windowMessage, sizeof(windowMessage));
 
     while (isRunning) {
-        if (!window.WindowIsRunning(msg)) {
+        if (!window.WindowIsRunning(windowMessage)) {
             isRunning = false;
             break;
         }

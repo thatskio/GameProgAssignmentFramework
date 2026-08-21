@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\AILogicManager.obj",
+            "outputs": [
+                "Debug\\AILogicManager.h.obj.dt.module.json",
+                "Debug\\AILogicManager.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}
