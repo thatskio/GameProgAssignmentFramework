@@ -4,6 +4,7 @@
 #include "PlayerInput.h"
 #include "FrameTimer.h"
 #include "GameStateManager.h" 
+#include "AudioManager.h" 
 
 const int SCREEN_WIDTH = 1920;
 const int SCREEN_HEIGHT = 1080;
@@ -16,6 +17,7 @@ private:
     PlayerInput input;
     FrameTimer gameTimer;
     GameStateManager stateManager;
+    AudioManager audioManager;
 
     bool isRunning;
 

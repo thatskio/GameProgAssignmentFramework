@@ -21,7 +21,7 @@ bool GameEngine::Initialize(HINSTANCE applicationInstance) {
         return false;
     }
 
-    stateManager.ChangeState(new StateMainMenu(&stateManager, graphics.GetDevice(), &input, SCREEN_WIDTH, SCREEN_HEIGHT));
+    stateManager.PushState(new StateMainMenu(&stateManager, graphics.GetDevice(), &input, SCREEN_WIDTH, SCREEN_HEIGHT));
 
     gameTimer.Init(FRAMES_PER_SECOND);
     isRunning = true;
@@ -60,6 +60,9 @@ void GameEngine::Run() {
 
         //Ending
         graphics.EndScene();
+
+        //Sound
+        audioManager.UpdateSound();
     }
 }
 

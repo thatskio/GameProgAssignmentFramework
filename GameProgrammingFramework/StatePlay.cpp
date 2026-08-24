@@ -11,8 +11,10 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
     input = playerInputPointer;
     screenWidth = initialScreenWidth;
     screenHeight = initialScreenHeight;
-    roundTimer = 30.0f;     //Change how long a game lasts here
-    fishRespawnTimer = 0.0f;
+    roundTimer = 30.0f;         //Change how long a game lasts here
+    fishAmount = 20;            //Change how many fishes to spawn
+    fishRespawnCooldown = 2.0f; //Change how long to wait, then check to respawn fishes
+    fishRespawnTimer = 0.0f;    //This is just a time tracker, leave at zero
     wasMouseButtonDown = false;
     d3dDevice = direct3DDevice;
 
@@ -40,10 +42,9 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
     audioManager->InitializeAudio();
     audioManager->LoadSounds("Boing", "boing.mp3", false);
 
-    //-----------GAME STARTS HERE-------------
-    //Spawning random fishes (x20)
+    //Spawning random fishes (x20, from fishAmount)
     srand((unsigned int)time(NULL));
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < fishAmount; i++) {
         float randomPositionX = (float)(rand() % (screenWidth - 64) + 32);
         float randomPositionY = (float)(rand() % (screenHeight - 100) + 50);
 
@@ -110,7 +111,7 @@ void StatePlay::Update(float deltaTime) {
             if (fish->IsActive()) activeFishes++;
         }
 
-        if (activeFishes < 20) {
+        if (activeFishes < fishAmount) {
             float randomPositionX = (float)(rand() % (screenWidth - 64) + 32);
             float randomPositionY = (float)(rand() % (screenHeight - 100) + 50);
 
@@ -124,7 +125,7 @@ void StatePlay::Update(float deltaTime) {
 
             aiManager.SpawnFish(D3DXVECTOR2(randomPositionX, randomPositionY), D3DXVECTOR2(velocityX, velocityY), 10, 100, fishSprite);
 
-            fishRespawnTimer = 2.0f; //2-second cooldown before spawning another
+            fishRespawnTimer = fishRespawnCooldown;
         }
     }
 

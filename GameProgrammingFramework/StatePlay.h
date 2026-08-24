@@ -29,7 +29,9 @@ private:
     float roundTimer;
     int screenWidth;
     int screenHeight;
+    int fishAmount;
     float fishRespawnTimer;
+    float fishRespawnCooldown;
     bool wasMouseButtonDown;
 
 public:
