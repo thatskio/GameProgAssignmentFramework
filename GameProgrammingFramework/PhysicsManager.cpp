@@ -37,7 +37,7 @@ void PhysicsManager::ProcessPhysics(AILogicManager* aiManager, BulletsManager* p
                 bullet->SetActive(false);
 
                 if (audioManager) {
-                    audioManager->PlayAudio("HitSound");
+                    audioManager->PlayAudio("Boing");
                 }
 
                 if (!fish->IsActive()) {

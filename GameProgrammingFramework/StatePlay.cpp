@@ -7,9 +7,6 @@
 #include <cmath> //Needed for bullet trajectory math
 
 StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* direct3DDevice, PlayerInput* playerInputPointer, int initialScreenWidth, int initialScreenHeight) : IGameState(stateManagerPointer) {
-    //Keybinds
-
-    
     //Variables
     input = playerInputPointer;
     screenWidth = initialScreenWidth;
@@ -41,9 +38,7 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
     //Initialize sounds
     audioManager = new AudioManager();
     audioManager->InitializeAudio();
-    audioManager->LoadSounds("CannonShootSound", "cannon1(Aristia - soft-hitclap).wav", false);
-    audioManager->LoadSounds("HitSound", "hitsound (AWattson - soft-hitnormal).mp3", false);
-
+    audioManager->LoadSounds("Boing", "boing.mp3", false);
 
     //-----------GAME STARTS HERE-------------
     //Spawning random fishes (x20)
@@ -95,8 +90,7 @@ void StatePlay::Input() {
         SpriteData bulletSprite = spriteManager.GetSprite("Bullet");
         bulletSprite.red = 255; bulletSprite.green = 255; bulletSprite.blue = 0;
 
-        bulletsManager.SpawnBullet(gunPosition, bulletVelocity, 10, bulletSprite, screenWidth, screenHeight);
-		audioManager->PlayAudio("CannonShootSound");
+        bulletsManager.SpawnBullet(gunPosition, bulletVelocity, 10, bulletSprite);
     }
     wasMouseButtonDown = isMouseButtonDown;
 }

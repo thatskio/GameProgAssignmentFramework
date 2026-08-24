@@ -14,7 +14,7 @@ StateMainMenu::StateMainMenu(GameStateManager* stateManagerPointer, IDirect3DDev
     //Initializing sounds
     audioManager = new AudioManager();
     audioManager->InitializeAudio();
-    audioManager->LoadSounds("MenuMusic", "sasakure.UK - Atropos.mp3", true);
+    audioManager->LoadSounds("MenuMusic", "lofi.wav", true);
 
     SoundParams params;
     params.loop = true;

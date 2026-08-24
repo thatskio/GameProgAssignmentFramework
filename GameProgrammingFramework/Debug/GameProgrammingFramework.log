@@ -1,3 +1,17 @@
 ﻿C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(551,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (game programming practical.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Projectile.cpp
-  GameProgrammingFramework.vcxproj -> C:\Users\User\source\repos\GameProgAssignmentFramework\Debug\GameProgrammingFramework.exe
+  GameEngine.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+D:\School\Game Programming\GameProgAssignmentFramework\GameProgrammingFramework\GameEngine.cpp(26,20): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  GraphicsManager.cpp
+  Main.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  StateGameOver.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  StateMainMenu.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  StatePlay.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  UIManager.cpp
+  Windows.cpp
+  Generating Code...
+  GameProgrammingFramework.vcxproj -> D:\School\Game Programming\GameProgAssignmentFramework\Debug\GameProgrammingFramework.exe

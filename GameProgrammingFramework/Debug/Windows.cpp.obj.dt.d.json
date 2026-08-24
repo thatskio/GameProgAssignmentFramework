@@ -1,10 +1,10 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "c:\\users\\user\\source\\repos\\gameprogassignmentframework\\gameprogrammingframework\\windows.cpp",
+        "Source": "d:\\school\\game programming\\gameprogassignmentframework\\gameprogrammingframework\\windows.cpp",
         "ProvidedModule": "",
         "Includes": [
-            "c:\\users\\user\\source\\repos\\gameprogassignmentframework\\gameprogrammingframework\\windows.h",
+            "d:\\school\\game programming\\gameprogassignmentframework\\gameprogrammingframework\\windows.h",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\um\\windows.h",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\shared\\winapifamily.h",
             "c:\\program files (x86)\\windows kits\\10\\include\\10.0.26100.0\\shared\\winpackagefamily.h",
