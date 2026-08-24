@@ -9,7 +9,7 @@ StateGameOver::StateGameOver(GameStateManager* handlerPtr, IDirect3DDevice9* dev
     screenHeight = height;
     finalScore = score;
     d3dDevice = device;
-
+//
     lineManager.Initialize(device);
     fontManager.Initialize(device, 24, "Arial");
     uiManager = new UIManager(&lineManager, &fontManager);
