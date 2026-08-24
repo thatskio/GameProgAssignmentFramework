@@ -10,6 +10,8 @@ protected:
     SpriteData sprite;
     float rotation;
     float radius;
+    float screenWidth;
+    float screenHeight;
     bool isActive;
 
 public:

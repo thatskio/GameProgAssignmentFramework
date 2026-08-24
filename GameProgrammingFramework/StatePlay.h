@@ -13,6 +13,9 @@
 
 class StatePlay : public IGameState {
 private:
+    //Keybinds
+    
+
     IDirect3DDevice9* d3dDevice;
     SpriteManager spriteManager;
     LineManager lineManager;

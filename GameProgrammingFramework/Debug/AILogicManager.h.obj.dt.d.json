@@ -1,11 +1,11 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "d:\\school\\game programming\\gameprogassignmentframework\\gameprogrammingframework\\ailogicmanager.h",
+        "Source": "c:\\users\\user\\source\\repos\\gameprogassignmentframework\\gameprogrammingframework\\ailogicmanager.h",
         "ProvidedModule": "",
         "Includes": [
-            "d:\\school\\game programming\\gameprogassignmentframework\\gameprogrammingframework\\npc.h",
-            "d:\\school\\game programming\\gameprogassignmentframework\\gameprogrammingframework\\gameobject.h",
+            "c:\\users\\user\\source\\repos\\gameprogassignmentframework\\gameprogrammingframework\\npc.h",
+            "c:\\users\\user\\source\\repos\\gameprogassignmentframework\\gameprogrammingframework\\gameobject.h",
             "c:\\program files (x86)\\microsoft directx sdk (june 2010)\\include\\d3dx9.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\limits.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\vcruntime.h",
@@ -266,9 +266,9 @@
             "c:\\program files (x86)\\microsoft directx sdk (june 2010)\\include\\d3dx9shape.h",
             "c:\\program files (x86)\\microsoft directx sdk (june 2010)\\include\\d3dx9.h",
             "c:\\program files (x86)\\microsoft directx sdk (june 2010)\\include\\d3dx9anim.h",
-            "d:\\school\\game programming\\gameprogassignmentframework\\gameprogrammingframework\\spritedata.h",
+            "c:\\users\\user\\source\\repos\\gameprogassignmentframework\\gameprogrammingframework\\spritedata.h",
             "c:\\program files (x86)\\microsoft directx sdk (june 2010)\\include\\d3dx9.h",
-            "d:\\school\\game programming\\gameprogassignmentframework\\gameprogrammingframework\\spritemanager.h",
+            "c:\\users\\user\\source\\repos\\gameprogassignmentframework\\gameprogrammingframework\\spritemanager.h",
             "c:\\program files (x86)\\microsoft directx sdk (june 2010)\\include\\d3dx9.h",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\string",
             "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\yvals_core.h",
