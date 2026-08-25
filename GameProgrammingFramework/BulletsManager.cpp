@@ -23,6 +23,16 @@ void BulletsManager::SpawnBullet(D3DXVECTOR2 position, D3DXVECTOR2 velocity, int
     }
 }
 
+void BulletsManager::SpawnBullet(D3DXVECTOR2 position, D3DXVECTOR2 velocity, int damage, SpriteData sprite, float screenWidth, float screenHeight) {
+    for (Projectile* bullet : bulletPool) {
+        if (!bullet->IsActive()) {
+            bullet->SetSprite(sprite);
+            bullet->Spawn(position, velocity, damage, screenWidth, screenHeight);
+            return;
+        }
+    }
+}
+
 void BulletsManager::Update() {
     for (Projectile* bullet : bulletPool) {
         if (bullet->IsActive()) { bullet->Update(); }

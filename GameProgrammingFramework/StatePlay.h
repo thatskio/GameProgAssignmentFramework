@@ -10,6 +10,7 @@
 #include "PhysicsManager.h"
 #include "PlayerInput.h"
 #include "AudioManager.h"
+#include "Obstacle.h"
 
 class StatePlay : public IGameState {
 private:
@@ -24,6 +25,7 @@ private:
     AILogicManager aiManager;
     BulletsManager bulletsManager;
     PhysicsManager physicsManager;
+    Obstacle obstacle;
     PlayerInput* input;
 
     float roundTimer;

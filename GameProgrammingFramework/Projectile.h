@@ -11,6 +11,7 @@ public:
 
     void Update() override; //"override" is to replace the "virtual" given to game objects (check GameObject.h)
     void Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 vector, int dmg);
+    void Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 vel, int dmg, float scrWidth, float scrnHeight);
 
     int GetDamage() const { return damage; }
 };

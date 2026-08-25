@@ -137,6 +137,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="PlayerInput.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FrameTimer.cpp" />
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="PlayerInput.h" />
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="FrameTimer.h" />

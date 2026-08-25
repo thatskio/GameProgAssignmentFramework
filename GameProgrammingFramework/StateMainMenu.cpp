@@ -18,6 +18,7 @@ StateMainMenu::StateMainMenu(GameStateManager* stateManagerPointer, IDirect3DDev
 
     SoundParams params;
     params.loop = true;
+    params.volume = 0;
     audioManager->PlayAudio("MenuMusic", params);
 
     uiManager = new UIManager(&lineManager, &fontManager);

@@ -24,6 +24,8 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
     fontManager.Initialize(direct3DDevice, 20, "Arial");
     uiManager = new UIManager(&lineManager, &fontManager);
 
+
+
     //Initialize sprites
     const char* placeholderPath = "Assets/practical9.png";  //Temporarily using the practical spaceship for now (note: it is 64x64 and loads from top to bottom)
     spriteManager.RegisterSprite("Crosshair", placeholderPath, { 0, 0, 32, 32 });
@@ -55,6 +57,15 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
 
         aiManager.SpawnFish(D3DXVECTOR2(randomPositionX, randomPositionY), D3DXVECTOR2(velocityX, velocityY), 10, 100, fishSprite);
     }
+
+    //Spawning obstacles
+    obstacle.Spawn({
+    D3DXVECTOR2(250.0f, 200.0f),
+    D3DXVECTOR2(450.0f, 200.0f),
+    D3DXVECTOR2(450.0f, 300.0f),
+    D3DXVECTOR2(500.0f, 500.0f),
+    D3DXVECTOR2(250.0f, 500.0f)
+        });
 }
 
 StatePlay::~StatePlay() {
@@ -91,7 +102,7 @@ void StatePlay::Input() {
         SpriteData bulletSprite = spriteManager.GetSprite("Bullet");
         bulletSprite.red = 255; bulletSprite.green = 255; bulletSprite.blue = 0;
 
-        bulletsManager.SpawnBullet(gunPosition, bulletVelocity, 10, bulletSprite);
+        bulletsManager.SpawnBullet(gunPosition, bulletVelocity, 10, bulletSprite, screenWidth, screenHeight);
     }
     wasMouseButtonDown = isMouseButtonDown;
 }
@@ -142,6 +153,8 @@ void StatePlay::Render() {
     bulletsManager.Render(&spriteManager);
     player.Render(&spriteManager);
     spriteManager.End();
+
+    obstacle.Draw(&lineManager, D3DCOLOR_ARGB(255, 100, 100, 100), 8.0f);
 
     //Drawing topbar/UI
     uiManager->DrawTopBar(player.GetScore(), 0, roundTimer, screenWidth);
