@@ -15,8 +15,8 @@
 class StatePlay : public IGameState {
 private:
     IDirect3DDevice9* d3dDevice;
-    SpriteManager spriteManager;
-    LineManager lineManager;
+    SpriteManager* spriteManager;
+    LineManager* lineManager;
     FontManager fontManager;
     UIManager* uiManager;
     AudioManager* audioManager;
@@ -37,7 +37,7 @@ private:
     bool wasMouseButtonDown;
 
 public:
-    StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* direct3DDevice, PlayerInput* playerInputPointer, int initialScreenWidth, int initialScreenHeight);
+    StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* direct3DDevice, PlayerInput* playerInputPointer, LineManager* lineManagerPointer, SpriteManager* spriteManagerPointer, int initialScreenWidth, int initialScreenHeight);
     ~StatePlay();
 
     void Input() override;

@@ -14,6 +14,7 @@ private:
     bool SimpleCircleCollision(GameObject* objA, GameObject* objB);
 	bool BoundingBoxCollision(GameObject* objA, GameObject* objB);
 	bool SATCollision(GameObject* objA, GameObject* objB);
+    bool SATCollision(Projectile* projectile, Obstacle* obstacle);
 
     //bool CheckCollision(GameObject* objA, GameObject* objB, const std::string collisionType); //Circle, BoundingBox, SAT
 

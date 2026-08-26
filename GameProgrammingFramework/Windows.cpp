@@ -43,7 +43,7 @@ void Windows::CreateMyWindow(int screenWidth, int screenHeight, bool isFullscree
 
     //Apply the exactWidth and exactHeight instead of hardcoding 800 and 600
     windowHandle = CreateWindowEx(0, windowClass.lpszClassName, windowName,
-        windowStyle, 0, 100, exactWidth, exactHeight,
+        windowStyle, 0, 0, exactWidth, exactHeight,
         NULL, NULL, GetModuleHandle(NULL), NULL);
 
     ShowWindow(windowHandle, 1);

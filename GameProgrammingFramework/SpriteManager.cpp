@@ -31,12 +31,32 @@ void SpriteManager::RegisterSprite(const std::string& key, LPCSTR filePath, RECT
     if (SUCCEEDED(hr) && newSprite.texture) {
         spriteRegistry[key] = newSprite;
     }
+    else std::cout << "Normal Sprite Registration failed!" << key << std::endl;
+}
+
+void SpriteManager::RegisterAnimatedSprite(const std::string& key, LPCSTR filePath, int frameWidth, int frameHeight, int totalColumns, int totalRows, int totalFrames) {
+    SpriteData newSprite;
+    newSprite.isAnimated = true;
+    newSprite.frameWidth = frameWidth;
+    newSprite.frameHeight = frameHeight;
+    newSprite.totalColumns = totalColumns;
+    newSprite.totalRows = totalRows;
+    newSprite.totalFrames = totalFrames;
+    newSprite.rect = { 0, 0, frameWidth, frameHeight };
+
+    HRESULT hr = D3DXCreateTextureFromFile(d3dDevice, filePath, &newSprite.texture);
+    if (SUCCEEDED(hr) && newSprite.texture) {
+        spriteRegistry[key] = newSprite;
+    }
+    else std::cout << "Animated Sprite Registration failed!" << key << std::endl;
 }
 
 SpriteData SpriteManager::GetSprite(const std::string& key) {
     if (spriteRegistry.find(key) != spriteRegistry.end()) {
         return spriteRegistry[key];
     }
+    else std::cout << "Sprite unable to be found, key invalid! [" << key << "]" << std::endl;
+
     return SpriteData();
 }
 
@@ -46,7 +66,7 @@ void SpriteManager::Begin() {
 
 void SpriteManager::Draw(SpriteData sprite, D3DXVECTOR2 position, float rotation, D3DXVECTOR2 scale) {
     if (!spriteBrush || !sprite.texture) {
-        std::cout << "Sprite brush or sprite texture invalid!";
+        std::cout << "Sprite brush or sprite texture invalid!" << std::endl;
         return;
     }
 
@@ -63,6 +83,26 @@ void SpriteManager::Draw(SpriteData sprite, D3DXVECTOR2 position, float rotation
 
     D3DXMatrixIdentity(&matrix);
     spriteBrush->SetTransform(&matrix);
+}
+
+void SpriteManager::DrawAnimationFrame(SpriteData sprite, int frameIndex, D3DXVECTOR2 position, float rotation, D3DXVECTOR2 scale) {
+    if (!spriteBrush || !sprite.texture) {
+        std::cout << "Sprite brush or sprite texture invalid!" << std::endl;
+        return;
+    }
+
+    if (sprite.isAnimated && sprite.totalFrames > 0 && sprite.totalColumns > 0) {
+        int safeFrameIndex = frameIndex % sprite.totalFrames;
+        int currentColumn = safeFrameIndex % sprite.totalColumns;
+        int currentRow = safeFrameIndex / sprite.totalColumns;
+
+        sprite.rect.left = currentColumn * sprite.frameWidth;
+        sprite.rect.top = currentRow * sprite.frameHeight;
+        sprite.rect.right = sprite.rect.left + sprite.frameWidth;
+        sprite.rect.bottom = sprite.rect.top + sprite.frameHeight;
+    }
+
+    Draw(sprite, position, rotation, scale);
 }
 
 void SpriteManager::End() {

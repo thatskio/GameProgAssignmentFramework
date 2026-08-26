@@ -3,16 +3,17 @@
 #include "StatePlay.h"
 #include "GameStateManager.h"
 
-StateGameOver::StateGameOver(GameStateManager* handlerPtr, IDirect3DDevice9* device, PlayerInput* inputPtr, int width, int height, int score) : IGameState(handlerPtr) {
+StateGameOver::StateGameOver(GameStateManager* handlerPtr, IDirect3DDevice9* device, PlayerInput* inputPtr, LineManager* lineManagerPointer, SpriteManager* spriteManagerPointer, int width, int height, int score) : IGameState(handlerPtr) {
     input = inputPtr;
+    lineManager = lineManagerPointer;
+    spriteManager = spriteManagerPointer;
     screenWidth = width;
     screenHeight = height;
     finalScore = score;
     d3dDevice = device;
-//
-    lineManager.Initialize(device);
+
     fontManager.Initialize(device, 24, "Arial");
-    uiManager = new UIManager(&lineManager, &fontManager);
+    uiManager = new UIManager(lineManager, &fontManager);
 }
 
 StateGameOver::~StateGameOver() {
@@ -39,7 +40,7 @@ void StateGameOver::Input() {
         //Causing the Play State to be unplayable/uninteractable, so we pop the current state + refresh the play state
         if (mx > screenWidth / 2 - 100 && mx < screenWidth / 2 + 100 &&
             my > screenHeight / 2 + 120 && my < screenHeight / 2 + 170) {
-            handler->PopState(new StatePlay(handler, d3dDevice, input, screenWidth, screenHeight)); //Revive the PlayState
+            handler->PopState(new StatePlay(handler, d3dDevice, input, lineManager, spriteManager, screenWidth, screenHeight)); //Revive the PlayState
             return;
         }
 

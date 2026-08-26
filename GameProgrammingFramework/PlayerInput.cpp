@@ -30,15 +30,15 @@ bool PlayerInput::Initialize(HWND hWnd) {
 
     //API to handle input devices (keyboard, controllers, mouse)
     HRESULT hr = DirectInput8Create(GetModuleHandle(NULL), 0x0800, IID_IDirectInput8, (void**)&dInput, NULL);
-    if (FAILED(hr)) { 
-        std::cout << "DirectInput8Create Failed!";
-        return false; 
+    if (FAILED(hr)) {
+        std::cout << "DirectInput8Create Failed!" << std::endl;
+        return false;
     }
-    
+
     //Creating keyboard
     hr = dInput->CreateDevice(GUID_SysKeyboard, &dInputKeyboardDevice, NULL);
     if (FAILED(hr)) {
-        std::cout << "Creating Keyboard Device Failed!";
+        std::cout << "Creating Keyboard Device Failed!" << std::endl;
         return false;
     }
     //Foreground to focus when game is active tab. Nonexclusive to allow window controls like alt+tab.
@@ -49,7 +49,7 @@ bool PlayerInput::Initialize(HWND hWnd) {
     //Creating mouse
     hr = dInput->CreateDevice(GUID_SysMouse, &dInputMouseDevice, NULL);
     if (FAILED(hr)) {
-        std::cout << "Creating Mouse Device Failed!";
+        std::cout << "Creating Mouse Device Failed!" << std::endl;
         return false;
     }
     dInputMouseDevice->SetDataFormat(&c_dfDIMouse);
@@ -60,22 +60,27 @@ bool PlayerInput::Initialize(HWND hWnd) {
 }
 
 void PlayerInput::Update() {
-    //DirectX Input
-    if (dInputMouseDevice) {
-        dInputMouseDevice->Acquire();
-        dInputMouseDevice->GetDeviceState(sizeof(DIMOUSESTATE), (LPVOID)&mouseState);
-    }
-    if (dInputKeyboardDevice) {
-        dInputKeyboardDevice->Acquire();
-        dInputKeyboardDevice->GetDeviceState(256, (LPVOID)diKeys);
-    }
-
-    //Windows (Native) Input (Because native mouse cursor is always offset in game)
+    // Windows (Native) Input - Update this first
     POINT pt;
     GetCursorPos(&pt);                  //Get the absolute screen position of the cursor
     ScreenToClient(targetWindow, &pt); //Translate it to be relative to your game window
     mousePosition.x = (float)pt.x;
     mousePosition.y = (float)pt.y;
+
+    if (dInputMouseDevice) {
+        HRESULT hr = dInputMouseDevice->GetDeviceState(sizeof(DIMOUSESTATE), (LPVOID)&mouseState);
+        if (FAILED(hr)) {
+            dInputMouseDevice->Acquire();
+        }
+        else  std::cout << "DirectX Mouse Device fetch failed!" << std::endl;
+    }
+    if (dInputKeyboardDevice) {
+        HRESULT hr = dInputKeyboardDevice->GetDeviceState(256, (LPVOID)diKeys);
+        if (FAILED(hr)) {
+            dInputKeyboardDevice->Acquire();
+        }
+        else  std::cout << "DirectX Keyboard Device fetch failed!" << std::endl;
+    }
 }
 
 bool PlayerInput::IsKeyDown(int key) {

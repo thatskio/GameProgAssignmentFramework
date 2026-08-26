@@ -5,6 +5,8 @@
 #include "FrameTimer.h"
 #include "GameStateManager.h" 
 #include "AudioManager.h" 
+#include "LineManager.h"
+#include "SpriteManager.h"
 
 const int SCREEN_WIDTH = 1920;
 const int SCREEN_HEIGHT = 1080;
@@ -18,6 +20,9 @@ private:
     FrameTimer gameTimer;
     GameStateManager stateManager;
     AudioManager audioManager;
+
+    LineManager lineManager;
+    SpriteManager spriteManager;
 
     bool isRunning;
 

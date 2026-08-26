@@ -20,10 +20,12 @@ public:
     //Creating sprites and putting them into a dictionary
     bool Initialize(IDirect3DDevice9* device);
     void RegisterSprite(const std::string& key, LPCSTR filePath, RECT defaultRect);
+    void RegisterAnimatedSprite(const std::string& key, LPCSTR filePath, int frameWidth, int frameHeight, int totalColumns, int totalRows, int totalFrames);
     SpriteData GetSprite(const std::string& key);
 
     //Rendering
     void Begin();
     void Draw(SpriteData sprite, D3DXVECTOR2 position, float rotation = 0.0f, D3DXVECTOR2 scale = D3DXVECTOR2(1.0f, 1.0f));
+    void DrawAnimationFrame(SpriteData sprite, int frameIndex, D3DXVECTOR2 position, float rotation = 0.0f, D3DXVECTOR2 scale = D3DXVECTOR2(1.0f, 1.0f));
     void End();
 };

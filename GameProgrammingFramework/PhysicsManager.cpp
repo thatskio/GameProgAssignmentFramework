@@ -13,7 +13,7 @@ bool PhysicsManager::SimpleCircleCollision(GameObject* objA, GameObject* objB) {
     return squaredDistance < (combinedRadius * combinedRadius);
 }
 
-bool SATCollision(Projectile* projectile, Obstacle* obstacle) {
+bool PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obstacle) {
     std::vector<D3DXVECTOR2> axes(obstacle->GetNodeCount());
 
 	// Getting the normal for each side of the polygon (obstacle)
@@ -35,7 +35,7 @@ bool SATCollision(Projectile* projectile, Obstacle* obstacle) {
     }
 
 
-
+    return true;
 }
 
 

@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\SpriteData.obj",
+            "outputs": [
+                "Debug\\SpriteData.h.obj.dt.module.json",
+                "Debug\\SpriteData.h.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}

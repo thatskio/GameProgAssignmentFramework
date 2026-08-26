@@ -10,18 +10,23 @@ GameEngine::GameEngine() {
 
 bool GameEngine::Initialize(HINSTANCE applicationInstance) {
     window.CreateMyWindow(SCREEN_WIDTH, SCREEN_HEIGHT, IS_FULLSCREEN);
-    std::cout << "Loaded window!";
+    std::cout << "Loaded Window!";
 
     if (!graphics.Initialize(window.GetWindowHandle(), SCREEN_WIDTH, SCREEN_HEIGHT, IS_FULLSCREEN)) {
-        std::cout << "Graphics failed to load!";
+        std::cout << "GraphicsManager failed to initialize!";
         return false;
     }
     if (!input.Initialize(window.GetWindowHandle())) {
-        std::cout << "Player input failed to load!";
+        std::cout << "PlayerInput failed to initialize!";
         return false;
     }
 
-    stateManager.PushState(new StateMainMenu(&stateManager, graphics.GetDevice(), &input, SCREEN_WIDTH, SCREEN_HEIGHT));
+    // Initialize global managers
+    IDirect3DDevice9* direct3DDevice = graphics.GetDevice();
+    lineManager.Initialize(direct3DDevice);
+    spriteManager.Initialize(direct3DDevice);
+
+    stateManager.PushState(new StateMainMenu(&stateManager, direct3DDevice, &input, &lineManager, &spriteManager, SCREEN_WIDTH, SCREEN_HEIGHT));
 
     gameTimer.Init(FRAMES_PER_SECOND);
     isRunning = true;

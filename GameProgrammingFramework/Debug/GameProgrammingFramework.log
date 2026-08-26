@@ -1,6 +1,10 @@
 ﻿C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(551,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (game programming practical.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  PlayerInput.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
   StatePlay.cpp
   C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-C:\Users\User\Desktop\CGP Framework\GameProgAssignmentFramework\GameProgrammingFramework\StatePlay.cpp(105,96): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\User\Desktop\CGP Framework\GameProgAssignmentFramework\GameProgrammingFramework\StatePlay.cpp(105,83): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  GameProgrammingFramework.vcxproj -> C:\Users\User\Desktop\CGP Framework\GameProgAssignmentFramework\Debug\GameProgrammingFramework.exe
+C:\Users\ADMIN\OneDrive\Documents\GitHub\GameProgAssignmentFramework\GameProgrammingFramework\StatePlay.cpp(106,96): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\ADMIN\OneDrive\Documents\GitHub\GameProgAssignmentFramework\GameProgrammingFramework\StatePlay.cpp(106,83): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Windows.cpp
+  Generating Code...
+  GameProgrammingFramework.vcxproj -> C:\Users\ADMIN\OneDrive\Documents\GitHub\GameProgAssignmentFramework\Debug\GameProgrammingFramework.exe

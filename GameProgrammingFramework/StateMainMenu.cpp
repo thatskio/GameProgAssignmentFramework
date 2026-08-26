@@ -2,13 +2,14 @@
 #include "StatePlay.h"
 #include "GameStateManager.h" 
 
-StateMainMenu::StateMainMenu(GameStateManager* stateManagerPointer, IDirect3DDevice9* direct3DDevice, PlayerInput* playerInputPointer, int initialScreenWidth, int initialScreenHeight) : IGameState(stateManagerPointer) {
+StateMainMenu::StateMainMenu(GameStateManager* stateManagerPointer, IDirect3DDevice9* direct3DDevice, PlayerInput* playerInputPointer, LineManager* lineManagerPointer, SpriteManager* spriteManagerPointer, int initialScreenWidth, int initialScreenHeight) : IGameState(stateManagerPointer) {
     input = playerInputPointer;
+    lineManager = lineManagerPointer;
+    spriteManager = spriteManagerPointer;
     screenWidth = initialScreenWidth;
     screenHeight = initialScreenHeight;
     d3dDevice = direct3DDevice;
 
-    lineManager.Initialize(direct3DDevice);
     fontManager.Initialize(direct3DDevice, 24, "Arial");
 
     //Initializing sounds
@@ -21,7 +22,7 @@ StateMainMenu::StateMainMenu(GameStateManager* stateManagerPointer, IDirect3DDev
     params.volume = 0;
     audioManager->PlayAudio("MenuMusic", params);
 
-    uiManager = new UIManager(&lineManager, &fontManager);
+    uiManager = new UIManager(lineManager, &fontManager);
 }
 
 StateMainMenu::~StateMainMenu() {
@@ -36,7 +37,7 @@ void StateMainMenu::Input() {
 
         //Simple bounding box for start button in the centre of the screen
         if (mouseX > screenWidth / 2 - 100 && mouseX < screenWidth / 2 + 100 && mouseY > screenHeight / 2 - 25 && mouseY < screenHeight / 2 + 25) {
-            handler->PushState(new StatePlay(handler, d3dDevice, input, screenWidth, screenHeight));
+            handler->PushState(new StatePlay(handler, d3dDevice, input, lineManager, spriteManager, screenWidth, screenHeight));
         }
     }
 }

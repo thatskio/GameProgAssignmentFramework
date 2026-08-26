@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "Debug\\NPC.obj",
+            "outputs": [
+                "Debug\\NPC.cpp.obj.dt.module.json",
+                "Debug\\NPC.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}
