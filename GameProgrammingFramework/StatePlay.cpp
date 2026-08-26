@@ -59,12 +59,10 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
     }
 
     //Spawning obstacles
-    obstacle.Spawn({
+    obstacleManager.AddObstacle({
     D3DXVECTOR2(250.0f, 200.0f),
     D3DXVECTOR2(450.0f, 200.0f),
-    D3DXVECTOR2(450.0f, 300.0f),
-    D3DXVECTOR2(500.0f, 500.0f),
-    D3DXVECTOR2(250.0f, 500.0f)
+    D3DXVECTOR2(450.0f, 300.0f)
         });
 }
 
@@ -143,7 +141,8 @@ void StatePlay::Update(float deltaTime) {
     player.Update();
     bulletsManager.Update();
     aiManager.Update();
-    physicsManager.ProcessPhysics(&aiManager, &bulletsManager, &player, audioManager, screenWidth, screenHeight);
+    obstacleManager.Update();
+    physicsManager.ProcessPhysics(&aiManager, &bulletsManager, &player, audioManager, &obstacleManager, screenWidth, screenHeight);
 }
 
 void StatePlay::Render() {
@@ -152,10 +151,9 @@ void StatePlay::Render() {
     aiManager.Render(&spriteManager);
     bulletsManager.Render(&spriteManager);
     player.Render(&spriteManager);
-    spriteManager.End();
-
-    obstacle.Draw(&lineManager, D3DCOLOR_ARGB(255, 100, 100, 100), 8.0f);
+    obstacleManager.Render(&lineManager);
 
     //Drawing topbar/UI
     uiManager->DrawTopBar(player.GetScore(), 0, roundTimer, screenWidth);
+    spriteManager.End();
 }

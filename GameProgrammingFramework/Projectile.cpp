@@ -29,9 +29,18 @@ void Projectile::Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 vel, int dmg, float scr
 
 void Projectile::Update() {
     if (!isActive) { return; }
+    UpdatePosition();
+    BorderCollision();
 
+
+}
+
+void Projectile::UpdatePosition()
+{
     position += velocity;
+}
 
+void Projectile::BorderCollision() {
     const float bulletWidth = static_cast<float>(sprite.rect.right - sprite.rect.left);
     const float bulletHeight = static_cast<float>(sprite.rect.bottom - sprite.rect.top);
     const float topEdge = 0;
@@ -57,4 +66,3 @@ void Projectile::Update() {
         velocity.y = velocity.y * BOUNCE_FACTOR;
     }
 }
-

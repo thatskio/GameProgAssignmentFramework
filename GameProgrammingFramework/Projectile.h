@@ -14,4 +14,10 @@ public:
     void Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 vel, int dmg, float scrWidth, float scrnHeight);
 
     int GetDamage() const { return damage; }
+
+    void UpdatePosition();
+
+    //Collsion
+    void BorderCollision();
+
 };
