@@ -25,7 +25,7 @@ private:
     AILogicManager aiManager;
     BulletsManager bulletsManager;
     PhysicsManager physicsManager;
-    Obstacle obstacle;
+    ObstacleManager obstacleManager;
     PlayerInput* input;
 
     float roundTimer;

@@ -70,7 +70,12 @@
     <ClCompile Include="Windows.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Obstacle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ObstacleManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AILogicManager.h">
@@ -145,7 +150,12 @@
     <ClInclude Include="Windows.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Obstacle.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ObstacleManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">
