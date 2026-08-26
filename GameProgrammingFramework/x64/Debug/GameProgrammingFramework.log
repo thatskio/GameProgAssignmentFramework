@@ -1,0 +1,90 @@
+﻿C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(551,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (game programming practical.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  AudioManager.cpp
+  Obstacle.cpp
+  ObstacleManager.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\AudioManager.h(2,10): error C1083: Cannot open include file: 'fmod.hpp': No such file or directory
+  (compiling source file 'AudioManager.cpp')
+  
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\GameObject.h(2,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'Obstacle.cpp')
+  
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\GameObject.h(2,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'ObstacleManager.cpp')
+  
+  PlayerInput.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\PlayerInput.h(6,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'PlayerInput.cpp')
+  
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  FontManager.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\FontManager.h(3,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'FontManager.cpp')
+  
+  FrameTimer.cpp
+  GameEngine.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\PlayerInput.h(6,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'GameEngine.cpp')
+  
+  GameObject.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\GameObject.h(2,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'GameObject.cpp')
+  
+  GameStateManager.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\PlayerInput.h(6,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'GameStateManager.cpp')
+  
+  GraphicsManager.cpp
+  LineManager.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\LineManager.h(3,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'LineManager.cpp')
+  
+  Maid.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\Maid.h(5,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'Maid.cpp')
+  
+  Main.cpp
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.26100.0\um\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\PlayerInput.h(6,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'Main.cpp')
+  
+  NPC.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\GameObject.h(2,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'NPC.cpp')
+  
+  AILogicManager.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\GameObject.h(2,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'AILogicManager.cpp')
+  
+  PhysicsManager.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\GameObject.h(2,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'PhysicsManager.cpp')
+  
+  Player.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\GameObject.h(2,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'Player.cpp')
+  
+  Projectile.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\GameObject.h(2,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'Projectile.cpp')
+  
+  BulletsManager.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\GameObject.h(2,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'BulletsManager.cpp')
+  
+  SpriteManager.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\SpriteManager.h(4,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'SpriteManager.cpp')
+  
+  Generating Code...
+  Compiling...
+  StateGameOver.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\LineManager.h(3,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'StateGameOver.cpp')
+  
+  StateMainMenu.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\LineManager.h(3,10): error C1083: Cannot open include file: 'd3dx9.h': No such file or directory
+  (compiling source file 'StateMainMenu.cpp')
+  
+  StatePlay.cpp

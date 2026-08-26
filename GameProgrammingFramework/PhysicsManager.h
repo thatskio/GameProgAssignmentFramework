@@ -13,6 +13,7 @@ private:
 
     bool SimpleCircleCollision(GameObject* objA, GameObject* objB);
 	bool BoundingBoxCollision(GameObject* objA, GameObject* objB);
+    D3DXVECTOR2 Project(const D3DXVECTOR2& axis, const Obstacle& obstacle);
 	bool SATCollision(GameObject* objA, GameObject* objB);
     bool SATCollision(Projectile* projectile, Obstacle* obstacle);
 
