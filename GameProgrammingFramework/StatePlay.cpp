@@ -70,7 +70,7 @@ StatePlay::~StatePlay() {
 }
 
 void StatePlay::Input() {
-    // FIX: Subtract 16 from X and Y to perfectly center the 32x32 crosshair sprite on the mouse
+    //Subtract 16 from X and Y to perfectly center the 32x32 crosshair sprite on the mouse
     player.UpdateInput((float)input->GetMousePosition().x - 16.0f, (float)input->GetMousePosition().y - 16.0f);
 
     bool isMouseButtonDown = input->IsMouseButtonDown(0);
