@@ -71,6 +71,8 @@ D3DXVECTOR2 PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obsta
     }
 
     D3DXVECTOR2 circlePos = projectile->GetCenter();
+
+
     //D3DXVECTOR2 closestVertex = obstacle->GetNode(0);
     //D3DXVECTOR2 toClosestVertex = circlePos - closestVertex;
     //float closestDistance = D3DXVec2LengthSq(&toClosestVertex);

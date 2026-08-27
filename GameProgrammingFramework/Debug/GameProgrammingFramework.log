@@ -1,7 +1,0 @@
-﻿C:\Program Files\Microsoft Visual Studio\18\Community\MSBuild\Microsoft\VC\v180\Microsoft.CppBuild.targets(551,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (game programming practical.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  PhysicsManager.cpp
-C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\PhysicsManager.cpp(33,47): warning C4244: 'argument': conversion from 'double' to 'FLOAT', possible loss of data
-C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\PhysicsManager.cpp(33,42): warning C4244: 'argument': conversion from 'double' to 'FLOAT', possible loss of data
-C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\PhysicsManager.cpp(104,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\PhysicsManager.cpp(134,18): warning C4244: 'argument': conversion from 'double' to 'FLOAT', possible loss of data
-  GameProgrammingFramework.vcxproj -> C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\Debug\GameProgrammingFramework.exe
