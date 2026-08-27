@@ -27,6 +27,12 @@ void Projectile::Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 vel, int dmg, float scr
     screenHeight = scrnHeight;
 }
 
+D3DXVECTOR2 Projectile::GetCenter()
+{
+	return D3DXVECTOR2(position.x + (sprite.rect.right - sprite.rect.left) / 2.0f,
+		position.y + (sprite.rect.bottom - sprite.rect.top) / 2.0f);
+}
+
 void Projectile::Update() {
     if (!isActive) { return; }
     UpdatePosition();

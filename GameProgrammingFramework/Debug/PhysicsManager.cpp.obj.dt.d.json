@@ -398,7 +398,11 @@
             "c:\\users\\user\\desktop\\cgp\\gameprogassignmentframework\\gameprogrammingframework\\obstaclemanager.h",
             "c:\\users\\user\\desktop\\cgp\\gameprogassignmentframework\\gameprogrammingframework\\obstacle.h",
             "c:\\users\\user\\desktop\\cgp\\gameprogassignmentframework\\gameprogrammingframework\\linemanager.h",
-            "c:\\program files (x86)\\microsoft directx sdk (june 2010)\\include\\d3dx9.h"
+            "c:\\program files (x86)\\microsoft directx sdk (june 2010)\\include\\d3dx9.h",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\algorithm",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\__msvc_heap_algorithms.hpp",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\__msvc_int128.hpp",
+            "c:\\program files\\microsoft visual studio\\18\\community\\vc\\tools\\msvc\\14.51.36231\\include\\__msvc_minmax.hpp"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

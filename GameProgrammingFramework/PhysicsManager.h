@@ -15,7 +15,7 @@ private:
 	bool BoundingBoxCollision(GameObject* objA, GameObject* objB);
     D3DXVECTOR2 Project(const D3DXVECTOR2& axis, const Obstacle& obstacle);
 	bool SATCollision(GameObject* objA, GameObject* objB);
-    bool SATCollision(Projectile* projectile, Obstacle* obstacle);
+    D3DXVECTOR2 SATCollision(Projectile* projectile, Obstacle* obstacle); // for circle vs polygon
 
     //bool CheckCollision(GameObject* objA, GameObject* objB, const std::string collisionType); //Circle, BoundingBox, SAT
 

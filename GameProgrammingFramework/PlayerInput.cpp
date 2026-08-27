@@ -72,14 +72,14 @@ void PlayerInput::Update() {
         if (FAILED(hr)) {
             dInputMouseDevice->Acquire();
         }
-        else  std::cout << "DirectX Mouse Device fetch failed!" << std::endl;
+        //else  std::cout << "DirectX Mouse Device fetch failed!" << std::endl;
     }
     if (dInputKeyboardDevice) {
         HRESULT hr = dInputKeyboardDevice->GetDeviceState(256, (LPVOID)diKeys);
         if (FAILED(hr)) {
             dInputKeyboardDevice->Acquire();
         }
-        else  std::cout << "DirectX Keyboard Device fetch failed!" << std::endl;
+        //else  std::cout << "DirectX Keyboard Device fetch failed!" << std::endl;
     }
 }
 
