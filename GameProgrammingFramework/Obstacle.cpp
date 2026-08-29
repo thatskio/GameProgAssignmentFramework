@@ -42,3 +42,15 @@ bool Obstacle::HasNodes() const
 {
 	return !nodes.empty();
 }
+
+//returns the average center of all nodes
+D3DXVECTOR2 Obstacle::GetCenter() const {
+	int count = GetNodeCount();
+	if (count == 0) return D3DXVECTOR2(0.0f, 0.0f);
+
+	D3DXVECTOR2 center(0.0f, 0.0f);
+	for (int i = 0; i < count; i++) {
+		center += GetNode(i);
+	}
+	return center / (float)count;
+}

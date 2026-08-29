@@ -18,6 +18,8 @@ public:
     void Draw(LineManager* lineManager, D3DCOLOR color, float thickness) const;
     bool HasNodes() const;
 
+    D3DXVECTOR2 GetCenter() const;
+
     D3DXVECTOR2 GetNode(size_t index) const;
     int GetNodeCount() const;
 

@@ -1,5 +1,6 @@
 #include "AILogicManager.h"
 
+
 AILogicManager::AILogicManager(int poolSize) {
     for (int i = 0; i < poolSize; i++) {
         fishPool.push_back(new NPC());

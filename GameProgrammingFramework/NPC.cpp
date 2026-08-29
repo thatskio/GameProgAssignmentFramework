@@ -42,10 +42,10 @@ void NPC::Render(SpriteManager* spriteManager) {
     if (isActive && spriteManager) {
         //If animated, use DrawAnimationFrame instead of static Draw
         if (sprite.isAnimated) {
-            spriteManager->DrawAnimationFrame(sprite, currentFrame, position, rotation);
+            spriteManager->DrawAnimationFrame(sprite, currentFrame, position, rotation, scale);
         }
         else {
-            spriteManager->Draw(sprite, position, rotation);
+            spriteManager->Draw(sprite, position, rotation, scale);
         }
     }
 }

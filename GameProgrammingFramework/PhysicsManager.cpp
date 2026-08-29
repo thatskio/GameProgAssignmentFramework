@@ -35,7 +35,8 @@ D3DXVECTOR2 PhysicsManager::Project(const D3DXVECTOR2& axis, const Obstacle& obs
 
 }
 
-D3DXVECTOR2 PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obstacle) {
+// Circle vs Polygon
+void PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obstacle) {
     //////////////////////////////////////////////////////////////////////////////
     // resources: 
     // https://dyn4j.org/2010/01/sat/
@@ -44,7 +45,7 @@ D3DXVECTOR2 PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obsta
 
 
     if (obstacle->GetNodeCount() < 2) {
-        return D3DXVECTOR2(0, 0);
+        return;
     }
 
     std::vector<D3DXVECTOR2> axes(obstacle->GetNodeCount());
@@ -64,7 +65,7 @@ D3DXVECTOR2 PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obsta
         // get either perpendicular vector
         D3DXVECTOR2 normal = D3DXVECTOR2(-edge.y, edge.x);
 
-        // the perp method is just (x, y) =&gt; (-y, x) or (y, -x)
+        // the perp method is just (x, y) => (-y, x) or (y, -x)
         axes[i] = normal;
 
         D3DXVec2Normalize(&axes[i], &axes[i]);
@@ -72,26 +73,21 @@ D3DXVECTOR2 PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obsta
 
     D3DXVECTOR2 circlePos = projectile->GetCenter();
 
+    // Add axis from closest vertex to circle center for corner collision
+    int closestNode = 0;
+    float minDistSq = (std::numeric_limits<float>::max)();
+    for (int i = 0; i < obstacle->GetNodeCount(); i++) {
+        D3DXVECTOR2 diff = circlePos - obstacle->GetNode(i);
+        float distSq = D3DXVec2Dot(&diff, &diff);
+        if (distSq < minDistSq) {
+            minDistSq = distSq;
+            closestNode = i;
+        }
+    }
+    D3DXVECTOR2 cornerAxis = circlePos - obstacle->GetNode(closestNode);
+    D3DXVec2Normalize(&cornerAxis, &cornerAxis);
+    axes.push_back(cornerAxis);
 
-    //D3DXVECTOR2 closestVertex = obstacle->GetNode(0);
-    //D3DXVECTOR2 toClosestVertex = circlePos - closestVertex;
-    //float closestDistance = D3DXVec2LengthSq(&toClosestVertex);
-    //for (int i = 1; i < obstacle->GetNodeCount(); i++) {
-    //    D3DXVECTOR2 vertex = obstacle->GetNode(i);
-    //    D3DXVECTOR2 toVertex = circlePos - vertex;
-    //    float distance = D3DXVec2LengthSq(&toVertex);
-    //    if (distance < closestDistance) {
-    //        closestDistance = distance;
-    //        closestVertex = vertex;
-    //    }
-    //}
-
-    //D3DXVECTOR2 circleToVertex = closestVertex - circlePos;
-    //if (D3DXVec2LengthSq(&circleToVertex) > 0.0f) {
-    //    D3DXVec2Normalize(&circleToVertex, &circleToVertex);
-    //    axes.push_back(circleToVertex);
-    //}
-    
     //////////////////////////////////////////////////////////////////////////////
     // Minimum Translation Vector
     // The minimum amount of vector needed to push the object out of collision.
@@ -116,7 +112,7 @@ D3DXVECTOR2 PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obsta
 		double overlapAmount = (std::min)(circle.y, polygon.y) - (std::max)(circle.x, polygon.x); // bracket on min max cuz win.h preprocessor doing some goofy shit
 
 		if (overlapAmount <= 0) {
-			return D3DXVECTOR2(0, 0); // no collision found
+			return; // no collision found
 		}
 
         if (overlapAmount < minimumOverlap){
@@ -124,21 +120,133 @@ D3DXVECTOR2 PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obsta
 			mtv = axis;
         }
         // NOTE TO SELF(or whoevers reading ts): The D3DXVECTOR here is not a vector for direction but for lines on a 1D plane.
-        // circle.x = min, circle.y = max | polygon.x = min, polygon.y = max
-   //     if (circle.y < polygon.x || polygon.y < circle.x) {
-			//return mtv;     // no collision found = mtv = (0,0)
-   //     }
+         //circle.x = min, circle.y = max | polygon.x = min, polygon.y = max
+        if (circle.y < polygon.x || polygon.y < circle.x) {
+			return;     // no collision found
+        }
 
 
     }
 
-	std::cout << "Collision detected!" << std::endl;
-    return mtv * minimumOverlap; // self explanatory, if collision is found it will return the mtv to add to the projectile velocity for collision response.
+    // Ensure MTV points from Obstacle to Projectile
+    D3DXVECTOR2 dir = circlePos - obstacle->GetCenter();
+    if (D3DXVec2Dot(&dir, &mtv) < 0.0f) {
+        mtv = -mtv;
+    }
 
+	std::cout << "Collision detected!" << std::endl;
+    projectile->SetPosition(projectile->GetPosition() + mtv * (float)minimumOverlap);
+
+    D3DXVECTOR2 newVelocity = projectile->GetVelocity();
+    float velocityNormal = D3DXVec2Dot(&newVelocity, &mtv);
+
+    if (velocityNormal < 0.0f) {
+        //float restitution = projectile->GetRestitution(); // 1.0 = fully elastic, 0.0 = stops
+        D3DXVECTOR2 newVel = newVelocity - 2 * velocityNormal * mtv;
+        projectile->SetVelocity(newVel);
+    }
+
+
+}
+// Polygon vs Polygon
+void PhysicsManager::SATCollision(Obstacle* obstacle1, Obstacle* obstacle2) {
+    if (obstacle1->GetNodeCount() < 2 || obstacle2->GetNodeCount() < 2) {
+        return;
+    }
+
+    std::vector<D3DXVECTOR2> axes;
+
+    // Get Normal
+    // Loop through polygon to find normal for each side (obstacle)
+    Obstacle* obstacles[2] = { obstacle1, obstacle2 };
+    for (int obj = 0; obj < 2; obj++) {
+        Obstacle* obstacle = obstacles[obj];
+        for (int i = 0; i < obstacle->GetNodeCount(); i++) {
+            // get the current vertex
+            D3DXVECTOR2 p1 = obstacle->GetNode(i);
+
+            // get the next vertex
+            D3DXVECTOR2 p2 = obstacle->GetNode(i + 1 == obstacle->GetNodeCount() ? 0 : i + 1);
+
+            // subtract the two to get the edge vector
+            D3DXVECTOR2 edge = p1 - p2;
+
+            // get either perpendicular vector
+            D3DXVECTOR2 normal = D3DXVECTOR2(-edge.y, edge.x);
+
+            // the perp method is just (x, y) => (-y, x) or (y, -x)
+            D3DXVec2Normalize(&normal, &normal);
+            axes.push_back(normal);
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
+    // Minimum Translation Vector
+    // The minimum amount of vector needed to push the object out of collision.
+    // If mtv = (0,0), no collision will be found
+    D3DXVECTOR2 mtv(0, 0);
+    double minimumOverlap = (std::numeric_limits<double>::max)();
+    //////////////////////////////////////////////////////////////////////////////
+
+    // Overlap Checking
+    // Loop through axis to check for overlap
+    for (size_t i = 0; i < axes.size(); i++) {
+        D3DXVECTOR2 axis = axes[i];
+
+        D3DXVECTOR2 polygon1 = PhysicsManager::Project(axis, *obstacle1);
+        D3DXVECTOR2 polygon2 = PhysicsManager::Project(axis, *obstacle2);
+
+        // NOTE TO SELF(or whoevers reading ts): The D3DXVECTOR here is not a vector for direction but for lines on a 1D plane.
+        //circle.x = min, circle.y = max | polygon.x = min, polygon.y = max
+        if (polygon1.y < polygon2.x || polygon2.y < polygon1.x) {
+            return;     // no collision found
+        }
+
+        double overlapAmount = (std::min)(polygon1.y, polygon2.y) - (std::max)(polygon1.x, polygon2.x); // bracket on min max cuz win.h preprocessor doing some goofy shit
+
+        if (overlapAmount <= 0) {
+            return; // no collision found
+        }
+
+        if (overlapAmount < minimumOverlap) {
+            minimumOverlap = overlapAmount;
+            mtv = axis;
+        }
+    }
+
+    // Ensure MTV points from Obstacle to Projectile
+    D3DXVECTOR2 direction = obstacle1->GetCenter() - obstacle2->GetCenter();
+    if (D3DXVec2Dot(&direction, &mtv) < 0.0f) {
+        mtv = -mtv;
+    }
+
+    std::cout << "Collision detected!" << std::endl;
+    obstacle1->SetPosition(obstacle1->GetPosition() + mtv * (float)minimumOverlap);
+
+    D3DXVECTOR2 newVelocity = obstacle1->GetVelocity();
+    float velocityNormal = D3DXVec2Dot(&newVelocity, &mtv);
+
+    if (velocityNormal < 0.0f) {
+        //float restitution = projectile->GetRestitution(); // 1.0 = fully elastic, 0.0 = stops
+        D3DXVECTOR2 newVel = newVelocity - 2 * velocityNormal * mtv;
+        obstacle1->SetVelocity(newVel);
+    }
 }
 
 
-void PhysicsManager::ProcessPhysics(AILogicManager* aiManager, BulletsManager* projManager, Player* player, AudioManager* audioManager, ObstacleManager* obstacleManager, int screenWidth, int screenHeight) {
+
+
+
+
+
+
+
+
+
+
+
+void PhysicsManager::ProcessPhysics(AILogicManager* aiManager
+    , BulletsManager* projManager, Player* player, AudioManager* audioManager, ObstacleManager* obstacleManager, int screenWidth, int screenHeight) {
     std::vector<Projectile*>& bullets = projManager->GetBullets();
     std::vector<NPC*>& fishes = aiManager->GetFishes();
     std::vector<Obstacle*>& obstacles = obstacleManager->GetObstacles();
@@ -162,19 +270,9 @@ void PhysicsManager::ProcessPhysics(AILogicManager* aiManager, BulletsManager* p
         for (Obstacle* obstacle : obstacles) {
 			D3DXVECTOR2 objectPosition = bullet->GetPosition();
 			D3DXVECTOR2 objectVelocity = bullet->GetVelocity();
-			D3DXVECTOR2 mtv = SATCollision(bullet, obstacle);
+			SATCollision(bullet, obstacle);
 
-			//bullet->SetPosition(objectPosition + mtv);
-			if (mtv != D3DXVECTOR2(0, 0)) {
-			std::cout << "MTV: (" << mtv.x << ", " << mtv.y << ")" << std::endl;
-			bullet->SetPosition(objectPosition + mtv);
-			bullet->SetVelocity(objectVelocity + mtv); // Reverse the velocity of the bullet
-			}
 
-			//if (SATCollision(bullet, obstacle)) {
-			//	bullet->SetActive(false);
-			//	std::cout << "Bullet collided with obstacle!" << std::endl;
-			//}
         }
 
 
