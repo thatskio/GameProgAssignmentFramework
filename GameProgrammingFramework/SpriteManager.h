@@ -26,6 +26,7 @@ public:
     //Rendering
     void Begin();
     void Draw(SpriteData sprite, D3DXVECTOR2 position, float rotation = 0.0f, D3DXVECTOR2 scale = D3DXVECTOR2(1.0f, 1.0f));
+    void DrawBobbing(SpriteData sprite, D3DXVECTOR2 position, float time, float speed, float amplitude, D3DXVECTOR2 scale = D3DXVECTOR2(1.0f, 1.0f));
     void DrawAnimationFrame(SpriteData sprite, int frameIndex, D3DXVECTOR2 position, float rotation = 0.0f, D3DXVECTOR2 scale = D3DXVECTOR2(1.0f, 1.0f));
     void End();
 };

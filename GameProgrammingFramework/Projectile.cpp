@@ -5,6 +5,7 @@
 
 Projectile::Projectile() {
     damage      = 0;
+    obstacleHitCount = 0;
     isActive    = false;
     radius      = 5.0f;
 }
@@ -15,6 +16,7 @@ void Projectile::Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 vel, int dmg) {
     position    = startPos;
     velocity    = vel;
     damage      = dmg;
+    obstacleHitCount = 0;
     isActive    = true;
 }
 
@@ -22,9 +24,15 @@ void Projectile::Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 vel, int dmg, float scr
     position = startPos;
     velocity = vel;
     damage = dmg;
+    obstacleHitCount = 0;
     isActive = true;
     screenWidth = scrWidth;
     screenHeight = scrnHeight;
+}
+
+bool Projectile::RegisterObstacleHit() {
+    obstacleHitCount++;
+    return obstacleHitCount >= 5;
 }
 
 D3DXVECTOR2 Projectile::GetCenter()
@@ -56,19 +64,19 @@ void Projectile::BorderCollision() {
 
     if (position.x <= topEdge) {
         position.x = 0.0f;
-        velocity.x = velocity.x * BOUNCE_FACTOR;
+        velocity.x = velocity.x * BOUNCE_FACTOR * mass;
     }
     else if (position.x >= rightEdge) {
         position.x = rightEdge;
-        velocity.x = velocity.x * BOUNCE_FACTOR;
+        velocity.x = velocity.x * BOUNCE_FACTOR * mass;
     }
 
     if (position.y <= topEdge) {
         position.y = 0.0f;
-        velocity.y = velocity.y * BOUNCE_FACTOR;
+        velocity.y = velocity.y * BOUNCE_FACTOR * mass;
     }
     else if (position.y >= bottomEdge) {
         position.y = bottomEdge;
-        velocity.y = velocity.y * BOUNCE_FACTOR;
+        velocity.y = velocity.y * BOUNCE_FACTOR * mass;
     }
 }

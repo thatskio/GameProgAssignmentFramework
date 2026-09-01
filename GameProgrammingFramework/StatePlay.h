@@ -28,13 +28,25 @@ private:
     ObstacleManager obstacleManager;
     PlayerInput* input;
 
-    float roundTimer;
+    int firingMode;
+    int highscore;
     int screenWidth;
     int screenHeight;
     int fishAmount;
     float fishRespawnTimer;
     float fishRespawnCooldown;
     bool wasMouseButtonDown;
+    bool wasEnterDown;
+    SpriteData backgroundSprite;
+    SpriteData foregroundSprites[4];
+    SpriteData cannonSprite;
+    float foregroundBobTime;
+    int cannonAnimationFrame;
+    int cannonAnimationTick;
+    bool cannonAnimating;
+
+    void LoadHighscore();
+    void SaveHighscore();
 
 public:
     StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* direct3DDevice, PlayerInput* playerInputPointer, LineManager* lineManagerPointer, SpriteManager* spriteManagerPointer, int initialScreenWidth, int initialScreenHeight);

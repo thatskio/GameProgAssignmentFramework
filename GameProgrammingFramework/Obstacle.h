@@ -8,6 +8,7 @@ private:
     std::vector<D3DXVECTOR2> nodes;
 
 
+
 public:
     Obstacle();
     Obstacle(const std::vector<D3DXVECTOR2>& nodePositions) : nodes(nodePositions) {}

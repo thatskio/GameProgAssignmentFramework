@@ -11,6 +11,7 @@ protected:
     D3DXVECTOR2 scale;
     float rotation;
     float radius;
+    float mass;
     float screenWidth;
     float screenHeight;
     bool isActive;
@@ -29,6 +30,7 @@ public:
     D3DXVECTOR2 GetScale() const { return scale; }
     float GetRotation() const { return rotation; }
     float GetRadius() const { return radius; }
+    float GetMass() const { return mass; }
     bool IsActive() const { return isActive; }
 
     void SetPosition(D3DXVECTOR2 newPos) { position = newPos; }
@@ -37,5 +39,6 @@ public:
     void SetScale(D3DXVECTOR2 newScale) { scale = newScale; }
     void SetRotation(float newRot) { rotation = newRot; }
     void SetRadius(float newRadius) { radius = newRadius; }
+    void SetMass(float newMass) { mass = newMass; }
     void SetActive(bool active) { isActive = active; }  
 };

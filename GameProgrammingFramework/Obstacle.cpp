@@ -2,6 +2,7 @@
 
 Obstacle::Obstacle()
 {
+	mass = 0.0f;
 }
 
 

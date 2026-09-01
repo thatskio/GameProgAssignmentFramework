@@ -4,6 +4,7 @@
 class Projectile : public GameObject {
 private:
     int damage;
+    int obstacleHitCount;
 
 public:
     Projectile();
@@ -14,6 +15,7 @@ public:
     void Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 vel, int dmg, float scrWidth, float scrnHeight);
 
     int GetDamage() const { return damage; }
+    bool RegisterObstacleHit();
     D3DXVECTOR2 GetCenter();
 
 

@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <ctime> 
 #include <cmath> //Needed for bullet trajectory math
+#include <fstream>
 
 StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* direct3DDevice, PlayerInput* playerInputPointer, LineManager* lineManagerPointer, SpriteManager* spriteManagerPointer, int initialScreenWidth, int initialScreenHeight) : IGameState(stateManagerPointer) {
     //Variables
@@ -13,12 +14,19 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
     spriteManager = spriteManagerPointer;
     screenWidth = initialScreenWidth;
     screenHeight = initialScreenHeight;
-    roundTimer = 30.0f;         //Change how long a game lasts here
+    firingMode = 1;
+    highscore = 0;
     fishAmount = 10;            //Change how many fishes to spawn
     fishRespawnCooldown = 2.0f; //Change how long to wait, then check to respawn fishes
     fishRespawnTimer = 0.0f;    //This is just a time tracker, leave at zero
     wasMouseButtonDown = false;
+    wasEnterDown = false;
+    foregroundBobTime = 0.0f;
+    cannonAnimationFrame = 0;
+    cannonAnimationTick = 0;
+    cannonAnimating = false;
     d3dDevice = direct3DDevice;
+    LoadHighscore();
 
     //Initialize tools
     fontManager.Initialize(direct3DDevice, 20, "Arial");
@@ -29,6 +37,21 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
     spriteManager->RegisterSprite("Crosshair", placeholderPath, { 0, 0, 32, 32 });
     spriteManager->RegisterSprite("Bullet", placeholderPath, { 0, 0, 32, 32 });
     spriteManager->RegisterAnimatedSprite("rainbow_whale", "Assets/Sprite/rainbow_whale.png", 128, 128, 4, 4, 8);
+
+    const RECT backgroundRect = { 0, 0, 512, 512 };
+    spriteManager->RegisterSprite("Background1", "Assets/Sprite/Background/1.png", backgroundRect);
+    spriteManager->RegisterSprite("Background2", "Assets/Sprite/Background/2.png", backgroundRect);
+    spriteManager->RegisterSprite("Background3", "Assets/Sprite/Background/3.png", backgroundRect);
+    spriteManager->RegisterSprite("Background4", "Assets/Sprite/Background/4.png", backgroundRect);
+    spriteManager->RegisterSprite("Background5", "Assets/Sprite/Background/5.png", backgroundRect);
+    spriteManager->RegisterAnimatedSprite("Cannon", "Assets/Sprite/cannonSheet.png", 60, 100, 3, 3, 9);
+
+    backgroundSprite = spriteManager->GetSprite("Background1");
+    foregroundSprites[0] = spriteManager->GetSprite("Background2");
+    foregroundSprites[1] = spriteManager->GetSprite("Background3");
+    foregroundSprites[2] = spriteManager->GetSprite("Background4");
+    foregroundSprites[3] = spriteManager->GetSprite("Background5");
+    cannonSprite = spriteManager->GetSprite("Cannon");
 
     SpriteData crosshairSprite = spriteManager->GetSprite("Crosshair");
     crosshairSprite.red = 255; crosshairSprite.green = 255; crosshairSprite.blue = 255;
@@ -305,19 +328,72 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
 }
 
 StatePlay::~StatePlay() {
+    SaveHighscore();
     delete uiManager;
     delete audioManager;
 }
 
+void StatePlay::LoadHighscore() {
+    std::ifstream highscoreFile("highscore.txt");
+    if (highscoreFile) {
+        highscoreFile >> highscore;
+        if (highscore < 0) {
+            highscore = 0;
+        }
+    }
+}
+
+void StatePlay::SaveHighscore() {
+    if (player.GetScore() > highscore) {
+        highscore = player.GetScore();
+    }
+
+    std::ofstream highscoreFile("highscore.txt");
+    if (highscoreFile) {
+        highscoreFile << highscore;
+    }
+}
+
 void StatePlay::Input() {
+    bool isEnterDown = input->IsKeyDown(DIK_RETURN);
+    if (isEnterDown && !wasEnterDown) {
+        player.AddScore(1000);
+    }
+    wasEnterDown = isEnterDown;
+
+    int previousFiringMode = firingMode;
+    if (input->IsKeyDown(DIK_1)) {
+        firingMode = 1;
+    }
+    else if (input->IsKeyDown(DIK_2)) {
+        firingMode = 2;
+    }
+    else if (input->IsKeyDown(DIK_3)) {
+        firingMode = 3;
+    }
+    if (firingMode != previousFiringMode) {
+        cannonAnimationFrame = 0;
+        cannonAnimationTick = 0;
+        cannonAnimating = false;
+    }
+
     //Subtract 16 from X and Y to perfectly center the 32x32 crosshair sprite on the mouse
     player.UpdateInput((float)input->GetMousePosition().x - 16.0f, (float)input->GetMousePosition().y - 16.0f);
 
     bool isMouseButtonDown = input->IsMouseButtonDown(0);
     if (isMouseButtonDown && !wasMouseButtonDown) {
+        const int shotCost = firingMode * 100;
+        if (player.GetScore() < shotCost) {
+            wasMouseButtonDown = isMouseButtonDown;
+            return;
+        }
+
+        cannonAnimationFrame = 0;
+        cannonAnimationTick = 0;
+        cannonAnimating = true;
 
         //Anchor the gun to the bottom middle
-        D3DXVECTOR2 gunPosition((float)(screenWidth / 2), (float)screenHeight);
+        D3DXVECTOR2 gunPosition((float)(screenWidth / 2), (float)screenHeight - 50.0f);
 
         //Finding mouse current position
         D3DXVECTOR2 targetPosition = player.GetPosition();
@@ -337,22 +413,40 @@ void StatePlay::Input() {
             direction = D3DXVECTOR2(0.0f, -1.0f); // Default to shooting straight up
         }
 
-        //Apply speed multiplier to the normalized direction
-        D3DXVECTOR2 bulletVelocity = direction * 15.0f;
-
         SpriteData bulletSprite = spriteManager->GetSprite("Bullet");
         bulletSprite.red = 255; bulletSprite.green = 255; bulletSprite.blue = 0;
 
-        bulletsManager.SpawnBullet(gunPosition, bulletVelocity, 10, bulletSprite, screenWidth, screenHeight);
+        const float bulletPositionOffsets[3] = { -16.0f, 0.0f, 16.0f };
+        for (int i = 0; i < 3; i++) {
+            if (firingMode == 1 && i != 1) {
+                continue;
+            }
+            if (firingMode == 2 && i == 1) {
+                continue;
+            }
+
+            D3DXVECTOR2 bulletPosition = gunPosition + D3DXVECTOR2(bulletPositionOffsets[i], 0.0f);
+            bulletsManager.SpawnBullet(bulletPosition, direction * 15.0f, 10, bulletSprite, screenWidth, screenHeight);
+        }
+
+        player.AddScore(-shotCost);
     }
     wasMouseButtonDown = isMouseButtonDown;
 }
 
 void StatePlay::Update(float deltaTime) {
-    roundTimer -= deltaTime;
-    if (roundTimer <= 0.0f) {   //Don't spawn more fishes if wave timer is over
-        handler->PushState(new StateGameOver(handler, d3dDevice, input, lineManager, spriteManager, screenWidth, screenHeight, player.GetScore()));
-        return;
+    foregroundBobTime += deltaTime;
+
+    if (cannonAnimating) {
+        cannonAnimationTick++;
+        if (cannonAnimationTick >= 10) {
+            cannonAnimationTick = 0;
+            cannonAnimationFrame++;
+            if (cannonAnimationFrame >= 3) {
+                cannonAnimationFrame = 0;
+                cannonAnimating = false;
+            }
+        }
     }
 
     //Fish respawning logic
@@ -395,14 +489,33 @@ void StatePlay::Update(float deltaTime) {
 }
 
 void StatePlay::Render() {
-    //Drawing game objects
+    // 1. Draw Background layers
+    spriteManager->Begin();
+
+    D3DXVECTOR2 backgroundScale(screenWidth / 512.0f, screenHeight / 512.0f);
+    spriteManager->Draw(backgroundSprite, D3DXVECTOR2(0.0f, 0.0f), 0.0f, backgroundScale);
+
+    const float bobSpeeds[4] = { 0.8f, 1.1f, 1.4f, 1.7f };
+    const float bobAmplitude = 8.0f;
+    for (int i = 0; i < 4; i++) {
+        spriteManager->DrawBobbing(foregroundSprites[i], D3DXVECTOR2(0.0f, 0.0f), foregroundBobTime, bobSpeeds[i], bobAmplitude, backgroundScale);
+    }
+
+    spriteManager->End();
+
+    obstacleManager.Render(lineManager);
+
     spriteManager->Begin();
     aiManager.Render(spriteManager);
     bulletsManager.Render(spriteManager);
-    player.Render(spriteManager);
-    obstacleManager.Render(lineManager);
 
-    //Drawing topbar/UI
-    uiManager->DrawTopBar(player.GetScore(), 0, roundTimer, screenWidth);
+    D3DXVECTOR2 cannonPosition((float)(screenWidth / 2), (float)screenHeight - 70.0f);
+    D3DXVECTOR2 cannonTarget = player.GetPosition() + D3DXVECTOR2(16.0f, 16.0f);
+    D3DXVECTOR2 cannonDirection = cannonTarget - cannonPosition;
+    float cannonRotation = atan2(cannonDirection.y, cannonDirection.x) + D3DX_PI / 2.0f;
+    int cannonFrame = ((firingMode - 1) * 3) + cannonAnimationFrame;
+    spriteManager->DrawAnimationFrame(cannonSprite, cannonFrame, cannonPosition, cannonRotation);
+
+    uiManager->DrawTopBar(player.GetScore(), 0, highscore, screenWidth);
     spriteManager->End();
 }

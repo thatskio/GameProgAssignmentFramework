@@ -1,5 +1,6 @@
 #include "SpriteManager.h"
 #include <iostream>
+#include <cmath>
 
 SpriteManager::SpriteManager() {
     spriteBrush = nullptr;
@@ -83,6 +84,11 @@ void SpriteManager::Draw(SpriteData sprite, D3DXVECTOR2 position, float rotation
 
     D3DXMatrixIdentity(&matrix);
     spriteBrush->SetTransform(&matrix);
+}
+
+void SpriteManager::DrawBobbing(SpriteData sprite, D3DXVECTOR2 position, float time, float speed, float amplitude, D3DXVECTOR2 scale) {
+    position.y += std::sinf(time * speed) * amplitude * scale.y;
+    Draw(sprite, position, 0.0f, scale);
 }
 
 void SpriteManager::DrawAnimationFrame(SpriteData sprite, int frameIndex, D3DXVECTOR2 position, float rotation, D3DXVECTOR2 scale) {

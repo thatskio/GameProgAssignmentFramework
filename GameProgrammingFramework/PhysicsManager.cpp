@@ -1,14 +1,23 @@
 #include "PhysicsManager.h"
 #include <algorithm> // this is for std::min and std::max
 #include <limits>
+#include <cstdlib>
+#include <cmath>
 
 PhysicsManager::PhysicsManager() {}
 PhysicsManager::~PhysicsManager() {}
 
 //If the distance squared between 2 objects is less than the combined radius squared, means collision = true
 bool PhysicsManager::SimpleCircleCollision(GameObject* objA, GameObject* objB) {
-    float deltaX = objB->GetPosition().x - objA->GetPosition().x;
-    float deltaY = objB->GetPosition().y - objA->GetPosition().y;
+    D3DXVECTOR2 objACenter = objA->GetPosition() + D3DXVECTOR2(
+        (objA->GetSprite().rect.right - objA->GetSprite().rect.left) * objA->GetScale().x * 0.5f,
+        (objA->GetSprite().rect.bottom - objA->GetSprite().rect.top) * objA->GetScale().y * 0.5f);
+    D3DXVECTOR2 objBCenter = objB->GetPosition() + D3DXVECTOR2(
+        (objB->GetSprite().rect.right - objB->GetSprite().rect.left) * objB->GetScale().x * 0.5f,
+        (objB->GetSprite().rect.bottom - objB->GetSprite().rect.top) * objB->GetScale().y * 0.5f);
+
+    float deltaX = objBCenter.x - objACenter.x;
+    float deltaY = objBCenter.y - objACenter.y;
     float squaredDistance = (deltaX * deltaX) + (deltaY * deltaY);
     float combinedRadius = objA->GetRadius() + objB->GetRadius();
 
@@ -135,6 +144,12 @@ void PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obstacle) {
     }
 
 	std::cout << "Collision detected!" << std::endl;
+    if (projectile->RegisterObstacleHit()) {
+        projectile->SetActive(false);
+    }
+    if (projectile->GetMass() == 0.0f) {
+        return;
+    }
     projectile->SetPosition(projectile->GetPosition() + mtv * (float)minimumOverlap);
 
     D3DXVECTOR2 newVelocity = projectile->GetVelocity();
@@ -142,7 +157,7 @@ void PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obstacle) {
 
     if (velocityNormal < 0.0f) {
         //float restitution = projectile->GetRestitution(); // 1.0 = fully elastic, 0.0 = stops
-        D3DXVECTOR2 newVel = newVelocity - 2 * velocityNormal * mtv;
+        D3DXVECTOR2 newVel = newVelocity - 2 * velocityNormal * mtv * projectile->GetMass();
         projectile->SetVelocity(newVel);
     }
 
@@ -221,6 +236,9 @@ void PhysicsManager::SATCollision(Obstacle* obstacle1, Obstacle* obstacle2) {
     }
 
     std::cout << "Collision detected!" << std::endl;
+    if (obstacle1->GetMass() == 0.0f) {
+        return;
+    }
     obstacle1->SetPosition(obstacle1->GetPosition() + mtv * (float)minimumOverlap);
 
     D3DXVECTOR2 newVelocity = obstacle1->GetVelocity();
@@ -228,7 +246,7 @@ void PhysicsManager::SATCollision(Obstacle* obstacle1, Obstacle* obstacle2) {
 
     if (velocityNormal < 0.0f) {
         //float restitution = projectile->GetRestitution(); // 1.0 = fully elastic, 0.0 = stops
-        D3DXVECTOR2 newVel = newVelocity - 2 * velocityNormal * mtv;
+        D3DXVECTOR2 newVel = newVelocity - 2 * velocityNormal * mtv * obstacle1->GetMass();
         obstacle1->SetVelocity(newVel);
     }
 }
@@ -268,12 +286,12 @@ void PhysicsManager::ProcessPhysics(AILogicManager* aiManager
 
 		//Bullet against obstacle collision
         for (Obstacle* obstacle : obstacles) {
-			D3DXVECTOR2 objectPosition = bullet->GetPosition();
-			D3DXVECTOR2 objectVelocity = bullet->GetVelocity();
+            if (!bullet->IsActive()) { break; }
 			SATCollision(bullet, obstacle);
 
 
         }
+        if (!bullet->IsActive()) { continue; }
 
 
 
@@ -282,11 +300,20 @@ void PhysicsManager::ProcessPhysics(AILogicManager* aiManager
             if (!fish->IsActive()) { continue; }
 
             if (SimpleCircleCollision(bullet, fish)) {
-                fish->TakeDamage(bullet->GetDamage());
+                float deathChance = 100.0f - (std::abs(fish->GetScale().x) * 25.0f);
+                deathChance = (std::max)(0.0f, (std::min)(100.0f, deathChance));
+                float randomChance = static_cast<float>(std::rand() % 10000) / 100.0f;
+
+                if (randomChance < deathChance) {
+                    fish->TakeDamage(bullet->GetDamage());
+                }
                 bullet->SetActive(false);
 
                 if (audioManager) {
-                    audioManager->PlayAudio("Boing");
+                    SoundParams soundParams;
+                    float collisionX = bullet->GetCenter().x;
+                    soundParams.pan = (std::max)(-1.0f, (std::min)(1.0f, (collisionX / screenWidth) * 2.0f - 1.0f));
+                    audioManager->PlayAudio("Boing", soundParams);
                 }
 
                 if (!fish->IsActive()) {

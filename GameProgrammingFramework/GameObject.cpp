@@ -6,6 +6,7 @@ GameObject::GameObject() {
     scale       = D3DXVECTOR2(1.0f, 1.0f);
     rotation    = 0.0f;
     radius      = 10.0f;
+    mass        = 1.0f;
     isActive    = true;
 }
 

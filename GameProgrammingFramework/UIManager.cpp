@@ -28,7 +28,7 @@ void UIManager::DrawTextOnly(const std::string& text, RECT textPosition, D3DCOLO
     }
 }
 
-void UIManager::DrawTopBar(int playerOneScore, int playerTwoScore, float timeRemaining, int screenWidth) {
+void UIManager::DrawTopBar(int playerOneScore, int playerTwoScore, float highscore, int screenWidth) {
     //Draw a semi-transparent black background panel for the HUD
     RECT topBarPosition = { 0, 0, screenWidth, 40 };
     DrawPanel(topBarPosition, D3DCOLOR_ARGB(180, 20, 20, 20));
@@ -39,7 +39,7 @@ void UIManager::DrawTopBar(int playerOneScore, int playerTwoScore, float timeRem
     RECT rightTextPosition = { screenWidth - 150, 0, screenWidth - 10, 40 };
 
     std::string scoreText = "Score: " + std::to_string(playerOneScore);
-    std::string timeText = "Time: " + std::to_string((int)timeRemaining);
+    std::string timeText = "Highscore: " + std::to_string((int)highscore);
     std::string rightSideText = ""; // + std::to_string(playerTwoScore);
 
     DrawTextOnly(scoreText, leftTextPosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);

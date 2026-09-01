@@ -1,4 +1,6 @@
 #include "NPC.h"
+#include <algorithm>
+#include <cmath>
 
 NPC::NPC() {    //Don't assign values here, we assign at NPC.Spawn to allow fish variants in future (that gives different rewards)
     health = 0;
@@ -23,6 +25,11 @@ void NPC::Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 startVel, int hp, int points) 
 
 void NPC::Update() {
     if (!isActive) { return; }
+
+    float spriteWidth = static_cast<float>(sprite.rect.right - sprite.rect.left) * std::abs(scale.x);
+    float spriteHeight = static_cast<float>(sprite.rect.bottom - sprite.rect.top) * std::abs(scale.y);
+    radius = (std::min)(spriteWidth, spriteHeight) * 0.375f;
+
     position += velocity;
 
     //Animation ticking logic
