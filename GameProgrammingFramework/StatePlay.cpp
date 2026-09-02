@@ -517,5 +517,6 @@ void StatePlay::Render() {
     spriteManager->DrawAnimationFrame(cannonSprite, cannonFrame, cannonPosition, cannonRotation);
 
     uiManager->DrawTopBar(player.GetScore(), 0, highscore, screenWidth);
+	uiManager->DrawSideBar(screenHeight, screenWidth);
     spriteManager->End();
 }

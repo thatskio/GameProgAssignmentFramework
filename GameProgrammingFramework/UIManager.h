@@ -1,12 +1,14 @@
 #pragma once
 #include "LineManager.h"
 #include "FontManager.h"
+#include "SpriteManager.h"
 #include <string>
 
 class UIManager {
 private:
     LineManager* lineManager;
     FontManager* fontManager;
+    SpriteManager* spriteManager;
 
 public:
     UIManager(LineManager* lineManager, FontManager* fontManager);
@@ -16,4 +18,5 @@ public:
     void DrawPanel(RECT panelPosition, D3DCOLOR backgroundColor);
     void DrawTextOnly(const std::string& text, RECT textPosition, D3DCOLOR textColor, DWORD alignment);
     void DrawTopBar(int playerOneScore, int playerTwoScore, float timeRemaining, int screenWidth);
+	void DrawSideBar(int screenHeight, int screenWidth);
 };

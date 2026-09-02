@@ -2,6 +2,7 @@
 
 UIManager::UIManager(LineManager* lineManager, FontManager* fontManager) {
     this->lineManager = lineManager;
+
     this->fontManager = fontManager;
 }
 
@@ -31,18 +32,45 @@ void UIManager::DrawTextOnly(const std::string& text, RECT textPosition, D3DCOLO
 void UIManager::DrawTopBar(int playerOneScore, int playerTwoScore, float highscore, int screenWidth) {
     //Draw a semi-transparent black background panel for the HUD
     RECT topBarPosition = { 0, 0, screenWidth, 40 };
-    DrawPanel(topBarPosition, D3DCOLOR_ARGB(180, 20, 20, 20));
 
+    DrawPanel(topBarPosition, D3DCOLOR_ARGB(180, 20, 20, 20));
     //Text label bounds
     RECT leftTextPosition = { 10, 0, 150, 40 };
+    RECT leftTipsPosition = { 150, 0, 300, 40 };
     RECT middleTextPosition = { ((screenWidth / 2) - 50), 0, ((screenWidth / 2) + 50), 40 };
     RECT rightTextPosition = { screenWidth - 150, 0, screenWidth - 10, 40 };
 
     std::string scoreText = "Score: " + std::to_string(playerOneScore);
+    std::string leftTips = "(100 score = 1 bullet)";
     std::string timeText = "Highscore: " + std::to_string((int)highscore);
     std::string rightSideText = ""; // + std::to_string(playerTwoScore);
 
     DrawTextOnly(scoreText, leftTextPosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
+    DrawTextOnly(leftTips, leftTipsPosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
     DrawTextOnly(timeText, middleTextPosition, D3DCOLOR_XRGB(255, 255, 255), DT_CENTER | DT_VCENTER | DT_NOCLIP);
     DrawTextOnly(rightSideText, rightTextPosition, D3DCOLOR_XRGB(255, 255, 255), DT_RIGHT | DT_VCENTER | DT_NOCLIP);
+}
+
+void UIManager :: DrawSideBar(int screenHeight, int screenWidth) { //the controls menu thingy, placed bottom left
+    RECT sideBarPosition = { 0, screenHeight - 130 , 200, screenHeight};
+
+	RECT controlTitlePosition = { 0, screenHeight - 125, 90, screenHeight - 100 };
+    RECT quitControlPosition = { 0, screenHeight - 100, 90, screenHeight - 75 };
+	RECT cannonControlPosition = { 0, screenHeight - 75 , 90, screenHeight - 50 };
+	RECT addTokenControlPosition = { 0, screenHeight - 50 , 90, screenHeight - 25 };
+	RECT shootControlPosition = { 0, screenHeight - 25 , 90, screenHeight};
+
+    std::string controlTitle = "Controls";
+    std::string quitText = " Q - Quit";
+	std::string cannonText = " 1 / 2 / 3 - Cannon Mode";
+	std::string addTokenText = " Enter - Add 1000 Score";
+    std::string shootText = " Left Click - Shoot";
+
+	DrawPanel(sideBarPosition, D3DCOLOR_ARGB(100, 20, 20, 20));
+    DrawTextOnly(controlTitle, controlTitlePosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
+    DrawTextOnly(quitText, quitControlPosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
+    DrawTextOnly(cannonText, cannonControlPosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
+    DrawTextOnly(addTokenText, addTokenControlPosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
+    DrawTextOnly(shootText, shootControlPosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
+
 }

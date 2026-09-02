@@ -17,6 +17,8 @@ private:
     PlayerInput* input;
     AudioManager* audioManager;
 
+    SpriteData startButtonSprite;
+
     int screenWidth;
     int screenHeight;
 
