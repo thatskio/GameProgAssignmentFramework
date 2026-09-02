@@ -45,7 +45,7 @@ void GameEngine::Run() {
 
         //Global Input (Alt tab / esc key quitting)
         input.Update();
-        if (input.IsKeyDown(DIK_ESCAPE) || input.IsKeyDown(DIK_Q)) {
+        if (input.IsKeyDown(DIK_ESCAPE)) {
             isRunning = false;
         }
 

@@ -37,6 +37,7 @@ private:
     float fishRespawnCooldown;
     bool wasMouseButtonDown;
     bool wasEnterDown;
+    bool wasQDown;
     SpriteData backgroundSprite;
     SpriteData foregroundSprites[4];
     SpriteData cannonSprite;

@@ -361,6 +361,12 @@ void StatePlay::Input() {
     }
     wasEnterDown = isEnterDown;
 
+    bool isQDown = input->IsKeyDown(DIK_Q);
+    if (isQDown && !wasQDown) {
+        handler->PushState(new StateGameOver(handler, d3dDevice, input, lineManager, spriteManager, screenWidth, screenHeight, player.GetScore() ));
+    }
+    wasQDown = isQDown;
+
     int previousFiringMode = firingMode;
     if (input->IsKeyDown(DIK_1)) {
         firingMode = 1;
