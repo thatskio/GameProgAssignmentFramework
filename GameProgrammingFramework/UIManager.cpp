@@ -1,4 +1,6 @@
 #include "UIManager.h"
+#include <iomanip>
+#include <sstream>
 
 UIManager::UIManager(LineManager* lineManager, FontManager* fontManager) {
     this->lineManager = lineManager;
@@ -51,20 +53,24 @@ void UIManager::DrawTopBar(int playerOneScore, int playerTwoScore, float highsco
     DrawTextOnly(rightSideText, rightTextPosition, D3DCOLOR_XRGB(255, 255, 255), DT_RIGHT | DT_VCENTER | DT_NOCLIP);
 }
 
-void UIManager :: DrawSideBar(int screenHeight, int screenWidth) { //the controls menu thingy, placed bottom left
-    RECT sideBarPosition = { 0, screenHeight - 130 , 200, screenHeight};
+void UIManager :: DrawSideBar(int screenHeight, int screenWidth, float bulletMass) { //the controls menu thingy, placed bottom left
+    RECT sideBarPosition = { 0, screenHeight - 155 , 200, screenHeight};
 
-	RECT controlTitlePosition = { 0, screenHeight - 125, 90, screenHeight - 100 };
-    RECT quitControlPosition = { 0, screenHeight - 100, 90, screenHeight - 75 };
-	RECT cannonControlPosition = { 0, screenHeight - 75 , 90, screenHeight - 50 };
-	RECT addTokenControlPosition = { 0, screenHeight - 50 , 90, screenHeight - 25 };
-	RECT shootControlPosition = { 0, screenHeight - 25 , 90, screenHeight};
+    RECT controlTitlePosition = { 0, screenHeight - 150, 200, screenHeight - 125 };
+    RECT quitControlPosition = { 0, screenHeight - 125, 200, screenHeight - 100 };
+    RECT cannonControlPosition = { 0, screenHeight - 100, 200, screenHeight - 75 };
+    RECT addTokenControlPosition = { 0, screenHeight - 75, 200, screenHeight - 50 };
+    RECT shootControlPosition = { 0, screenHeight - 50, 200, screenHeight - 25 };
+    RECT massControlPosition = { 0, screenHeight - 25, 200, screenHeight };
 
     std::string controlTitle = "Controls";
     std::string quitText = " Q - Quit";
 	std::string cannonText = " 1 / 2 / 3 - Cannon Mode";
 	std::string addTokenText = " Enter - Add 1000 Score";
     std::string shootText = " Left Click - Shoot";
+    std::ostringstream massValue;
+    massValue << std::fixed << std::setprecision(1) << bulletMass;
+    std::string massText = " Up/Down - Mass: " + massValue.str();
 
 	DrawPanel(sideBarPosition, D3DCOLOR_ARGB(100, 20, 20, 20));
     DrawTextOnly(controlTitle, controlTitlePosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
@@ -72,5 +78,6 @@ void UIManager :: DrawSideBar(int screenHeight, int screenWidth) { //the control
     DrawTextOnly(cannonText, cannonControlPosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
     DrawTextOnly(addTokenText, addTokenControlPosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
     DrawTextOnly(shootText, shootControlPosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
+    DrawTextOnly(massText, massControlPosition, D3DCOLOR_XRGB(255, 255, 255), DT_LEFT | DT_VCENTER | DT_NOCLIP);
 
 }

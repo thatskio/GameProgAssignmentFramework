@@ -1,0 +1,45 @@
+﻿  AudioManager.cpp
+  Obstacle.cpp
+  ObstacleManager.cpp
+  PlayerInput.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  FontManager.cpp
+  FrameTimer.cpp
+  GameEngine.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\GameEngine.cpp(31,20): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  GameObject.cpp
+  GameStateManager.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  GraphicsManager.cpp
+  LineManager.cpp
+  Main.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  NPC.cpp
+  AILogicManager.cpp
+  PhysicsManager.cpp
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\PhysicsManager.cpp(42,47): warning C4244: 'argument': conversion from 'double' to 'FLOAT', possible loss of data
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\PhysicsManager.cpp(42,42): warning C4244: 'argument': conversion from 'double' to 'FLOAT', possible loss of data
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\PhysicsManager.cpp(111,23): warning C4018: '<': signed/unsigned mismatch
+  Player.cpp
+  Projectile.cpp
+  BulletsManager.cpp
+  SpriteManager.cpp
+  StateGameOver.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  Compiling...
+  StateMainMenu.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  StatePlay.cpp
+  C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\StatePlay.cpp(109,43): warning C4244: 'argument': conversion from 'int' to 'FLOAT', possible loss of data
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\StatePlay.cpp(470,112): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\StatePlay.cpp(470,99): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\GameProgrammingFramework\StatePlay.cpp(557,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  UIManager.cpp
+  Windows.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 1059 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  GameProgrammingFramework.vcxproj -> C:\Users\User\Desktop\CGP\GameProgAssignmentFramework\Release\GameProgrammingFramework.exe

@@ -13,6 +13,7 @@ public:
 
     void SpawnBullet(D3DXVECTOR2 position, D3DXVECTOR2 velocity, int damage, SpriteData sprite);
     void SpawnBullet(D3DXVECTOR2 position, D3DXVECTOR2 velocity, int damage, SpriteData sprite, float screenWidth, float screenHeight);
+    void SpawnBullet(D3DXVECTOR2 position, D3DXVECTOR2 velocity, int damage, SpriteData sprite, float screenWidth, float screenHeight, float mass);
     void Update();
     void Render(SpriteManager* spriteManager);
 

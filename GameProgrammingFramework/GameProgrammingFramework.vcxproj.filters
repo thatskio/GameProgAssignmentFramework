@@ -31,9 +31,6 @@
     <ClCompile Include="LineManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Maid.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>

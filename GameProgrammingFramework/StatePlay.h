@@ -28,7 +28,19 @@ private:
     ObstacleManager obstacleManager;
     PlayerInput* input;
 
+    // Controls
+    int quitKey;
+    int alternateQuitKey;
+    int addScoreKey;
+    int cannonModeOneKey;
+    int cannonModeTwoKey;
+    int cannonModeThreeKey;
+    int increaseMassKey;
+    int decreaseMassKey;
+    int shootMouseButton;
+
     int firingMode;
+    float bulletMass;
     int highscore;
     int screenWidth;
     int screenHeight;
@@ -37,8 +49,11 @@ private:
     float fishRespawnCooldown;
     bool wasMouseButtonDown;
     bool wasEnterDown;
+    bool wasArrowUpDown;
+    bool wasArrowDownDown;
     SpriteData backgroundSprite;
     SpriteData foregroundSprites[4];
+    SpriteData fishSprite;
     SpriteData cannonSprite;
     float foregroundBobTime;
     int cannonAnimationFrame;

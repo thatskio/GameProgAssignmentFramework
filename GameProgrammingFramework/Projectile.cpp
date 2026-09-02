@@ -16,14 +16,20 @@ void Projectile::Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 vel, int dmg) {
     position    = startPos;
     velocity    = vel;
     damage      = dmg;
+    mass        = 1.0f;
     obstacleHitCount = 0;
     isActive    = true;
 }
 
 void Projectile::Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 vel, int dmg, float scrWidth, float scrnHeight) {
+    Spawn(startPos, vel, dmg, scrWidth, scrnHeight, 1.0f);
+}
+
+void Projectile::Spawn(D3DXVECTOR2 startPos, D3DXVECTOR2 vel, int dmg, float scrWidth, float scrnHeight, float bulletMass) {
     position = startPos;
     velocity = vel;
     damage = dmg;
+    mass = bulletMass;
     obstacleHitCount = 0;
     isActive = true;
     screenWidth = scrWidth;
@@ -55,6 +61,7 @@ void Projectile::UpdatePosition()
 }
 
 void Projectile::BorderCollision() {
+    const float collisionMass = mass > 0.0f ? mass : 1.0f;
     const float bulletWidth = static_cast<float>(sprite.rect.right - sprite.rect.left);
     const float bulletHeight = static_cast<float>(sprite.rect.bottom - sprite.rect.top);
     const float topEdge = 0;
@@ -64,19 +71,19 @@ void Projectile::BorderCollision() {
 
     if (position.x <= topEdge) {
         position.x = 0.0f;
-        velocity.x = velocity.x * BOUNCE_FACTOR * mass;
+        velocity.x = velocity.x * BOUNCE_FACTOR / collisionMass;
     }
     else if (position.x >= rightEdge) {
         position.x = rightEdge;
-        velocity.x = velocity.x * BOUNCE_FACTOR * mass;
+        velocity.x = velocity.x * BOUNCE_FACTOR / collisionMass;
     }
 
     if (position.y <= topEdge) {
         position.y = 0.0f;
-        velocity.y = velocity.y * BOUNCE_FACTOR * mass;
+        velocity.y = velocity.y * BOUNCE_FACTOR / collisionMass;
     }
     else if (position.y >= bottomEdge) {
         position.y = bottomEdge;
-        velocity.y = velocity.y * BOUNCE_FACTOR * mass;
+        velocity.y = velocity.y * BOUNCE_FACTOR / collisionMass;
     }
 }

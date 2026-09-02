@@ -14,13 +14,28 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
     spriteManager = spriteManagerPointer;
     screenWidth = initialScreenWidth;
     screenHeight = initialScreenHeight;
+
+    // Controls
+    quitKey = DIK_ESCAPE;
+    alternateQuitKey = DIK_Q;
+    addScoreKey = DIK_RETURN;
+    cannonModeOneKey = DIK_1;
+    cannonModeTwoKey = DIK_2;
+    cannonModeThreeKey = DIK_3;
+    increaseMassKey = DIK_UP;
+    decreaseMassKey = DIK_DOWN;
+    shootMouseButton = 0;
+
     firingMode = 1;
+    bulletMass = 1;
     highscore = 0;
-    fishAmount = 10;            //Change how many fishes to spawn
+    fishAmount = 20;            //Change how many fishes to spawn
     fishRespawnCooldown = 2.0f; //Change how long to wait, then check to respawn fishes
     fishRespawnTimer = 0.0f;    //This is just a time tracker, leave at zero
     wasMouseButtonDown = false;
     wasEnterDown = false;
+    wasArrowUpDown = false;
+    wasArrowDownDown = false;
     foregroundBobTime = 0.0f;
     cannonAnimationFrame = 0;
     cannonAnimationTick = 0;
@@ -57,8 +72,8 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
     crosshairSprite.red = 255; crosshairSprite.green = 255; crosshairSprite.blue = 255;
     player.SetSprite(crosshairSprite);
 
-    SpriteData rainbowWhaleSprite = spriteManager->GetSprite("rainbow_whale");
-    rainbowWhaleSprite.red = 255; rainbowWhaleSprite.green = 255; rainbowWhaleSprite.blue = 255;
+    fishSprite = spriteManager->GetSprite("rainbow_whale");
+    fishSprite.red = 255; fishSprite.green = 255; fishSprite.blue = 255;
 
     //SpriteData fishSprite = spriteManager->GetSprite("GoldFish");
     //fishSprite.red = 255; fishSprite.green = 50; fishSprite.blue = 50;
@@ -68,6 +83,11 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
     audioManager = new AudioManager();
     audioManager->InitializeAudio();
     audioManager->LoadSounds("Boing", "boing.mp3", false);
+	audioManager->LoadSounds("AddScore", "addScore.wav", false);
+    audioManager->LoadSounds("Shoot", "shoot.mp3", false);
+    audioManager->LoadSounds("Hit", "hit.mp3", false);
+
+
 
     //Spawning random fishes (x20, from fishAmount)
     srand((unsigned int)time(NULL));
@@ -80,7 +100,7 @@ StatePlay::StatePlay(GameStateManager* stateManagerPointer, IDirect3DDevice9* di
         if (velocityX == 0.0f) { velocityX = 1.5f; }
         if (velocityY == 0.0f) { velocityY = -1.5f; }
 
-        aiManager.SpawnFish(D3DXVECTOR2(randomPositionX, randomPositionY), D3DXVECTOR2(velocityX, velocityY), 10, 100, rainbowWhaleSprite);
+        aiManager.SpawnFish(D3DXVECTOR2(randomPositionX, randomPositionY), D3DXVECTOR2(velocityX, velocityY), 10, 100, fishSprite);
     }
     for (NPC* fish : aiManager.GetFishes()) {
         int min = 1;
@@ -355,20 +375,27 @@ void StatePlay::SaveHighscore() {
 }
 
 void StatePlay::Input() {
-    bool isEnterDown = input->IsKeyDown(DIK_RETURN);
+    if (input->IsKeyDown(quitKey) || input->IsKeyDown(alternateQuitKey)) {
+        handler->PopState(new StateGameOver(handler, d3dDevice, input, lineManager, spriteManager, screenWidth, screenHeight, player.GetScore()));
+        return;
+    }
+
+    bool isEnterDown = input->IsKeyDown(addScoreKey);
     if (isEnterDown && !wasEnterDown) {
+
         player.AddScore(1000);
+        audioManager->PlayAudio("AddScore", SoundParams());
     }
     wasEnterDown = isEnterDown;
 
     int previousFiringMode = firingMode;
-    if (input->IsKeyDown(DIK_1)) {
+    if (input->IsKeyDown(cannonModeOneKey)) {
         firingMode = 1;
     }
-    else if (input->IsKeyDown(DIK_2)) {
+    else if (input->IsKeyDown(cannonModeTwoKey)) {
         firingMode = 2;
     }
-    else if (input->IsKeyDown(DIK_3)) {
+    else if (input->IsKeyDown(cannonModeThreeKey)) {
         firingMode = 3;
     }
     if (firingMode != previousFiringMode) {
@@ -377,16 +404,29 @@ void StatePlay::Input() {
         cannonAnimating = false;
     }
 
+    bool isArrowUpDown = input->IsKeyDown(increaseMassKey);
+    bool isArrowDownDown = input->IsKeyDown(decreaseMassKey);
+    if (isArrowUpDown && !wasArrowUpDown && bulletMass < 2) {
+        bulletMass+=.1f;
+    }
+    if (isArrowDownDown && !wasArrowDownDown && bulletMass > 1) {
+        bulletMass-=.1f;
+    }
+    wasArrowUpDown = isArrowUpDown;
+    wasArrowDownDown = isArrowDownDown;
+
     //Subtract 16 from X and Y to perfectly center the 32x32 crosshair sprite on the mouse
     player.UpdateInput((float)input->GetMousePosition().x - 16.0f, (float)input->GetMousePosition().y - 16.0f);
 
-    bool isMouseButtonDown = input->IsMouseButtonDown(0);
+    bool isMouseButtonDown = input->IsMouseButtonDown(shootMouseButton);
     if (isMouseButtonDown && !wasMouseButtonDown) {
         const int shotCost = firingMode * 100;
         if (player.GetScore() < shotCost) {
             wasMouseButtonDown = isMouseButtonDown;
+
             return;
         }
+        audioManager->PlayAudio("Shoot", SoundParams());
 
         cannonAnimationFrame = 0;
         cannonAnimationTick = 0;
@@ -426,7 +466,8 @@ void StatePlay::Input() {
             }
 
             D3DXVECTOR2 bulletPosition = gunPosition + D3DXVECTOR2(bulletPositionOffsets[i], 0.0f);
-            bulletsManager.SpawnBullet(bulletPosition, direction * 15.0f, 10, bulletSprite, screenWidth, screenHeight);
+            const float bulletSpeed = 15.0f / bulletMass;
+            bulletsManager.SpawnBullet(bulletPosition, direction * bulletSpeed, 10, bulletSprite, screenWidth, screenHeight, bulletMass);
         }
 
         player.AddScore(-shotCost);
@@ -472,9 +513,6 @@ void StatePlay::Update(float deltaTime) {
             if (velocityX == 0.0f) velocityX = 1.5f;
             if (velocityY == 0.0f) velocityY = -1.5f;
 
-            SpriteData fishSprite = spriteManager->GetSprite("GoldFish");
-            fishSprite.red = 255; fishSprite.green = 50; fishSprite.blue = 50;
-
             aiManager.SpawnFish(D3DXVECTOR2(randomPositionX, randomPositionY), D3DXVECTOR2(velocityX, velocityY), 10, 100, fishSprite);
 
             fishRespawnTimer = fishRespawnCooldown;
@@ -517,6 +555,6 @@ void StatePlay::Render() {
     spriteManager->DrawAnimationFrame(cannonSprite, cannonFrame, cannonPosition, cannonRotation);
 
     uiManager->DrawTopBar(player.GetScore(), 0, highscore, screenWidth);
-	uiManager->DrawSideBar(screenHeight, screenWidth);
+    uiManager->DrawSideBar(screenHeight, screenWidth, bulletMass);
     spriteManager->End();
 }

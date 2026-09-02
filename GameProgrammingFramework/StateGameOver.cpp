@@ -56,7 +56,7 @@ void StateGameOver::Update(float deltaTime) {}
 
 void StateGameOver::Render() {
     RECT titleRect = { 0, 100, screenWidth, 150 };
-    uiManager->DrawTextOnly("GAME OVER!", titleRect, D3DCOLOR_XRGB(255, 50, 50), DT_CENTER | DT_VCENTER);
+    uiManager->DrawTextOnly("GAME OVER!", titleRect, D3DCOLOR_XRGB(50, 255, 50), DT_CENTER | DT_VCENTER);
 
     RECT scoreRect = { 0, 200, screenWidth, 250 };
     std::string scoreTxt = "Final Score: " + std::to_string(finalScore);

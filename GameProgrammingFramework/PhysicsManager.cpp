@@ -156,8 +156,7 @@ void PhysicsManager::SATCollision(Projectile* projectile, Obstacle* obstacle) {
     float velocityNormal = D3DXVec2Dot(&newVelocity, &mtv);
 
     if (velocityNormal < 0.0f) {
-        //float restitution = projectile->GetRestitution(); // 1.0 = fully elastic, 0.0 = stops
-        D3DXVECTOR2 newVel = newVelocity - 2 * velocityNormal * mtv * projectile->GetMass();
+        D3DXVECTOR2 newVel = newVelocity - 2 * velocityNormal * mtv / projectile->GetMass();
         projectile->SetVelocity(newVel);
     }
 
@@ -300,7 +299,7 @@ void PhysicsManager::ProcessPhysics(AILogicManager* aiManager
             if (!fish->IsActive()) { continue; }
 
             if (SimpleCircleCollision(bullet, fish)) {
-                float deathChance = 100.0f - (std::abs(fish->GetScale().x) * 25.0f);
+                float deathChance = (100.0f - (std::abs(fish->GetScale().x) * 25.0f))/3;
                 deathChance = (std::max)(0.0f, (std::min)(100.0f, deathChance));
                 float randomChance = static_cast<float>(std::rand() % 10000) / 100.0f;
 
@@ -313,11 +312,12 @@ void PhysicsManager::ProcessPhysics(AILogicManager* aiManager
                     SoundParams soundParams;
                     float collisionX = bullet->GetCenter().x;
                     soundParams.pan = (std::max)(-1.0f, (std::min)(1.0f, (collisionX / screenWidth) * 2.0f - 1.0f));
-                    audioManager->PlayAudio("Boing", soundParams);
+                    audioManager->PlayAudio("Hit", soundParams);
                 }
 
                 if (!fish->IsActive()) {
-                    player->AddScore(fish->GetPointValue());
+                    int scaledPoints = static_cast<int>(fish->GetPointValue() * std::abs(fish->GetScale().x)*2);
+                    player->AddScore(scaledPoints);
                 }
                 break;
             }

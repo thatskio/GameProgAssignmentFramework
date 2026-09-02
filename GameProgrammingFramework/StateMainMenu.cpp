@@ -15,11 +15,11 @@ StateMainMenu::StateMainMenu(GameStateManager* stateManagerPointer, IDirect3DDev
     //Initializing sounds
     audioManager = new AudioManager();
     audioManager->InitializeAudio();
-    audioManager->LoadSounds("MenuMusic", "lofi.wav", true);
+    audioManager->LoadSounds("MenuMusic", "Nekomata Master - Echoes.mp3", true);
 
     SoundParams params;
     params.loop = true;
-    params.volume = 0;
+    params.volume = 1;
     audioManager->PlayAudio("MenuMusic", params);
 
     uiManager = new UIManager(lineManager, &fontManager);
